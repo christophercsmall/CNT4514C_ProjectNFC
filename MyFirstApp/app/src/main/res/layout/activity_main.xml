@@ -21,4 +21,12 @@
         />
 
 
+    <TextView android:id="@+id/help_message"
+        android:layout_weight="0.40"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/help_message"
+        android:textStyle="normal|bold" />
+
 </LinearLayout>
+
