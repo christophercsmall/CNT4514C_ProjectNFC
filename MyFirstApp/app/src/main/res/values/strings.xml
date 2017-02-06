@@ -3,4 +3,5 @@
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
     <string name="help_message">Enter text, then press button.</string>
+    <string name="explanation">Tap device with NFC tag</string>
 </resources>
