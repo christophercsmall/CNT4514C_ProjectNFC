@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -10,8 +10,13 @@
         android:text="Write a message: ">
     </TextView>
 
+    <TextView
+        android:id="@+id/nfc_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp" >
@@ -21,17 +26,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="message" />
+            android:hint="Write a message." />
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Write" />
+            android:text="Write"
+            style="@android:style/Widget.Button" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/nfc_contents"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:layout_marginTop="20sp" >
+
+        <TextView
+            android:id="@+id/save_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="message" />
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            style="@android:style/Widget.Button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp">
+
+
+    </LinearLayout>
+
 </LinearLayout>
