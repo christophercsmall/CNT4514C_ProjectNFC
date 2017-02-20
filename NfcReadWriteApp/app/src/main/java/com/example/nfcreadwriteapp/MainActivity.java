@@ -1,5 +1,6 @@
 package com.example.nfcreadwriteapp;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -125,7 +126,7 @@ public class MainActivity extends Activity {
 
      /**********************************Write to NFC Tag****************************/
     private void write(String text, Tag tag) throws IOException, FormatException {
-        NdefRecord[] records = { createRecord(text) };
+        NdefRecord[] records = { createEmptyRecord() };
         NdefMessage message = new NdefMessage(records);
         // Get an instance of Ndef for the tag.
         Ndef ndef = Ndef.get(tag);
@@ -136,6 +137,7 @@ public class MainActivity extends Activity {
         // Close the connection
         ndef.close();
     }
+
     private NdefRecord createRecord(String text) throws UnsupportedEncodingException {
         String lang = "en";
         byte[] textBytes = text.getBytes();
@@ -153,11 +155,34 @@ public class MainActivity extends Activity {
         //arraycopy(Object source, int sourcePosition, Object destination, int destinationPosition, int numberOfElements)
 
         NdefRecord recordNFC = new NdefRecord(NdefRecord.TNF_WELL_KNOWN,  NdefRecord.RTD_TEXT,  new byte[0], payload);
+        //NdefRecord (short tnf, byte[] type, byte[] id, byte[] payload);
 
         return recordNFC;
     }
 
+    private NdefRecord createEmptyRecord() throws UnsupportedEncodingException {
 
+        String text = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+        String lang = "en";
+        byte[] textBytes = text.getBytes();
+        byte[] langBytes = lang.getBytes("US-ASCII");
+        int langLength = langBytes.length;
+        int textLength = textBytes.length;
+        byte[] payload = new byte[1 + langLength + textLength];
+
+        // set status byte (see NDEF spec for actual bits)
+        payload[0] = (byte) langLength;
+
+        // copy langbytes and textbytes into payload
+        System.arraycopy(langBytes, 0, payload, 1, langLength);
+        System.arraycopy(textBytes, 0, payload, 1 + langLength, textLength);
+        //arraycopy(Object source, int sourcePosition, Object destination, int destinationPosition, int numberOfElements)
+
+        NdefRecord recordNFC = new NdefRecord(NdefRecord.TNF_WELL_KNOWN,  NdefRecord.RTD_TEXT,  new byte[0], payload);
+        //NdefRecord (short tnf, byte[] type, byte[] id, byte[] payload);
+
+        return recordNFC;
+    }
 
     @Override
     protected void onNewIntent(Intent intent) {
