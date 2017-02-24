@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Write a message: ">
-    </TextView>
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
 
     <TextView
         android:id="@+id/nfc_contents"
@@ -23,7 +19,7 @@
 
         <EditText
             android:id="@+id/edit_message"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="Write a message." />
@@ -42,15 +38,16 @@
 
         <TextView
             android:id="@+id/save_message"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="message" />
+            android:hint="@string/clearBtn_message" />
+
         <Button
-            android:id="@+id/saveBtn"
+            android:id="@+id/btnClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="Clear"
             style="@android:style/Widget.Button" />
     </LinearLayout>
 
@@ -58,6 +55,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp">
+
+        <TextView
+            android:id="@+id/btnGoToQ1_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="@string/btnGoToQ1_message" />
+
+        <Button
+            android:id="@+id/btnGoToQ1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnGoToQ1_Lbl"
+            style="@android:style/Widget.Button" />
+
+
+
 
 
     </LinearLayout>

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">NfcReadWriteApp</string>
     <string name="save_message">Message Recorded</string>
-
-
+    <string name="clearBtn_message">Fill tag with Zeros</string>
+    <string name="btnGoToQ1_Lbl">Question 1</string>
+    <string name="btnGoToQ1_message">Go to Question 1</string>
 </resources>

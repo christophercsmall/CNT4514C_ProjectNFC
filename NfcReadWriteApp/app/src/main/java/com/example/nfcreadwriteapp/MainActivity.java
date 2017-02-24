@@ -13,6 +13,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.Parcelable;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,8 @@ public class MainActivity extends Activity {
     public static final String ERROR_DETECTED = "No NFC tag detected!";
     public static final String WRITE_SUCCESS = "Text written to the NFC tag successfully!";
     public static final String WRITE_ERROR = "Error during writing, is the NFC tag close enough to your device?";
+    public static final String ERASE_SUCCESS = "NFC tag data erased successfully!";
+    public static final String ERASE_ERROR = "Error during erasing, is the NFC tag close enough to your device?";
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
@@ -38,7 +41,7 @@ public class MainActivity extends Activity {
 
     TextView tvNFCContent;
     TextView message;
-    Button btnWrite;
+    Button btnWrite, btnClear, btnGoToQ1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class MainActivity extends Activity {
         tvNFCContent = (TextView) findViewById(R.id.nfc_contents);
         message = (TextView) findViewById(R.id.edit_message);
         btnWrite = (Button) findViewById(R.id.button);
+        btnClear = (Button) findViewById(R.id.btnClear);
+        btnGoToQ1 = (Button) findViewById(R.id.btnGoToQ1);
 
         btnWrite.setOnClickListener(new View.OnClickListener()
         {
@@ -68,6 +73,50 @@ public class MainActivity extends Activity {
                     Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG ).show();
                     e.printStackTrace();
                 }
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if(myTag ==null) {
+                        Toast.makeText(context, ERROR_DETECTED, Toast.LENGTH_LONG).show();
+                    } else {
+                        erase(myTag);
+                        Toast.makeText(context, ERASE_SUCCESS, Toast.LENGTH_LONG ).show();
+                    }
+                } catch (IOException e) {
+                    Toast.makeText(context, ERASE_ERROR, Toast.LENGTH_LONG ).show();
+                    e.printStackTrace();
+                } catch (FormatException e) {
+                    Toast.makeText(context, ERASE_ERROR, Toast.LENGTH_LONG ).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        btnGoToQ1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MainActivity.this, Q1Activity.class));
+//                try {
+//                    if(myTag ==null) {
+//                        Toast.makeText(context, ERROR_DETECTED, Toast.LENGTH_LONG).show();
+//                    } else {
+//                        erase(myTag);
+//                        Toast.makeText(context, ERASE_SUCCESS, Toast.LENGTH_LONG ).show();
+//                    }
+//                } catch (IOException e) {
+//                    Toast.makeText(context, ERASE_ERROR, Toast.LENGTH_LONG ).show();
+//                    e.printStackTrace();
+//                } catch (FormatException e) {
+//                    Toast.makeText(context, ERASE_ERROR, Toast.LENGTH_LONG ).show();
+//                    e.printStackTrace();
+//                }
             }
         });
 
@@ -103,6 +152,7 @@ public class MainActivity extends Activity {
             buildTagViews(msgs);
         }
     }
+
     private void buildTagViews(NdefMessage[] msgs) {
         if (msgs == null || msgs.length == 0) return;
 
@@ -120,12 +170,27 @@ public class MainActivity extends Activity {
             Log.e("UnsupportedEncoding", e.toString());
         }
 
+        Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        vib.vibrate(500);
         tvNFCContent.setText("NFC Content: " + text);
     }
 
 
      /**********************************Write to NFC Tag****************************/
     private void write(String text, Tag tag) throws IOException, FormatException {
+        NdefRecord[] records = { createRecord(text) };
+        NdefMessage message = new NdefMessage(records);
+        // Get an instance of Ndef for the tag.
+        Ndef ndef = Ndef.get(tag);
+        // Enable I/O
+        ndef.connect();
+        // Write the message
+        ndef.writeNdefMessage(message);
+        // Close the connection
+        ndef.close();
+    }
+
+    private void erase(Tag tag) throws IOException, FormatException {
         NdefRecord[] records = { createEmptyRecord() };
         NdefMessage message = new NdefMessage(records);
         // Get an instance of Ndef for the tag.
