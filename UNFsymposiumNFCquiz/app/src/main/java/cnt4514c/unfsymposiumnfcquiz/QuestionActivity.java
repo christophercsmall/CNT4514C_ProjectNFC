@@ -20,6 +20,7 @@ import java.util.List;
 
 public class QuestionActivity extends AppCompatActivity {
 
+    //
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
@@ -74,6 +75,7 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     public void buildTagViews(NdefMessage[] msgs) {
+        Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
 
         if (msgs == null || msgs.length == 0) return;
         String text = "";
@@ -87,82 +89,47 @@ public class QuestionActivity extends AppCompatActivity {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
+            if (checkAns(text)){
+                vib.vibrate(200);
+                updateQuestionActivity();
+            }
+            else{
+                vib.vibrate(1000);
+            }
+
         } catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());
         }
     }
 
-    public void initializeQuiz(){
-
-        addQuestion("What does NFC stand for?", "Near Field Communication", "Native File Cache","Network Firewall Communication", "Native Framework Cache");
-        addQuestion("How many bits are in a byte?", "8", "32", "100", "16");
+    public void updateQuestionActivity(){
+        if (qNum == 1){
+            qText.setText(quiz.qArray.get(0).qTxt);
+        }
     }
 
-    /**
-     * @param qString //The question
-     * @param aString //The correct answer
-     * @param optString1 //Incorrect answer option 1
-     * @param optString2 //Incorrect answer option 2
-     * @param optString3 //Incorrect answer option 3
-     */
-    public void addQuestion(String qString, String aString, String optString1, String optString2, String optString3){
-        Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-
-        Question q = new Question();
-        Answer a = new Answer();
-        QuestionOption qo = new QuestionOption();
-        Integer n = 0;
-        boolean idExists = true;
-
-        while (idExists){
-            for (Integer id : quiz.qIDs) {
-                if (n.equals(id)){
-                    n++;
-                }
-                else{
-                    idExists = false;
-                    vib.vibrate(1000);
-                }
-            }
-
-        }
-
-        quiz.qIDs.add(n);
-        qText.setText(n.toString());
-//
-//        quiz.qIDs.add(n);
-//
-//        q.id = n;
-//        q.txt = qString;
-//        quiz.qArray.add(q);
-//
-//        a.id = n;
-//        a.txt = aString;
-//        quiz.aArray.add(a);
-//
-//        qo.id = n;
-//        qo.option.add(optString1);
-//        qo.option.add(optString2);
-//        qo.option.add(optString3);
-//        quiz.qOptionArray.add(qo);
+    public void initializeQuiz(){
+        quiz.addQuestion("What does NFC stand for?", "Near Field Communication", "Native File Cache","Network Firewall Communication", "Native Framework Cache");
+        quiz.addQuestion("How many bits are in a byte?", "8", "32", "100", "16");
     }
 
     public void nextQuestion(String tagText){
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         String text = tagText;
-//        if (ans.equals("A")){
-//            vib.vibrate(200);
-//        }
-//        else{
-//            vib.vibrate(1000);
-//        }
+        if (tagText.equals("A")){
+        }
+        else{
+            vib.vibrate(1000);
+        }
     }
 
-    public boolean checkAns(String q, String a){
+    public boolean checkAns(String tagContents){
         boolean result = false;
 
-        if (q.equals(a)) {
+        if (tagContents.equals("A")) {
             result = true;
+            qNum++;
+
         }
         return result;
     }
