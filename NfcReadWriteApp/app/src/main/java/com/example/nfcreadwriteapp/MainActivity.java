@@ -178,6 +178,9 @@ public class MainActivity extends Activity {
 
      /**********************************Write to NFC Tag****************************/
     private void write(String text, Tag tag) throws IOException, FormatException {
+
+        //NdefRecord.createApplicationRecord("cnt4514c.unfsymposiumnfcquiz")
+
         NdefRecord[] records = { createRecord(text) };
         NdefMessage message = new NdefMessage(records);
         // Get an instance of Ndef for the tag.
