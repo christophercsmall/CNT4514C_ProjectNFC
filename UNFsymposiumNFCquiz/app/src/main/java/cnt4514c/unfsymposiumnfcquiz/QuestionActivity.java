@@ -27,7 +27,6 @@ public class QuestionActivity extends AppCompatActivity {
     Tag myTag;
     TextView qText, aText1, aText2, aText3, aText4;
     boolean writeMode;
-    Integer qNum = 0;
     Quiz quiz = new Quiz();
 
     @Override
@@ -55,6 +54,7 @@ public class QuestionActivity extends AppCompatActivity {
         writeTagFilters = new IntentFilter[] { tagDetected };
 
         initializeQuiz();
+        updateQuestionActivity();
     }
 
     public void readFromIntent(Intent intent) {
@@ -89,6 +89,8 @@ public class QuestionActivity extends AppCompatActivity {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
+
+
             if (checkAns(text)){
                 vib.vibrate(200);
                 updateQuestionActivity();
@@ -103,32 +105,39 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     public void updateQuestionActivity(){
-        if (qNum == 1){
-            qText.setText(quiz.qArray.get(0).qTxt);
-        }
+        //get question from array; index is referenced from object
+        qText.setText(quiz.qArray.get(quiz.currentQuestionNum).qTxt);
     }
+
 
     public void initializeQuiz(){
+        quiz.currentQuestionNum = 0;
         quiz.addQuestion("What does NFC stand for?", "Near Field Communication", "Native File Cache","Network Firewall Communication", "Native Framework Cache");
         quiz.addQuestion("How many bits are in a byte?", "8", "32", "100", "16");
+        quiz.randomizeQuestions();
     }
 
-    public void nextQuestion(String tagText){
-        Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        String text = tagText;
-        if (tagText.equals("A")){
-        }
-        else{
-            vib.vibrate(1000);
-        }
-    }
+//    public void nextQuestion(Integer qNum){
+//        Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+//        String text = tagText;
+//        if (tagText.equals("A")){
+//        }
+//        else{
+//            vib.vibrate(1000);
+//        }
+//    }
 
     public boolean checkAns(String tagContents){
         boolean result = false;
+        List key = new ArrayList();
+        key.add("A");
+        key.add("B");
+        key.add("C");
+        key.add("D");
 
         if (tagContents.equals("A")) {
             result = true;
-            qNum++;
+            quiz.currentQuestionNum++;
 
         }
         return result;

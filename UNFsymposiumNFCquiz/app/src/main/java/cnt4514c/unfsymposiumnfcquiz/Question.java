@@ -17,4 +17,8 @@ public class Question {
         return this.qTxt;
     }
 
+    public String getaTxt(){
+        return this.aTxt;
+    }
+
 }
