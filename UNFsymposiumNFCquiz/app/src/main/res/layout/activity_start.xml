@@ -16,13 +16,22 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-
-        <ImageView
-            android:scaleType="centerInside"
-            android:layout_centerHorizontal="true"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="200px"
-            android:src="@drawable/nfc_tag_image"/>
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:gravity="center"
+                android:padding="50dp">
+                <ImageView
+                    android:scaleType="centerInside"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="200px"
+                    android:src="@drawable/nfc_tag_image"/>
+            </TableRow>
+
+        </TableLayout>
 
     </RelativeLayout>
 
