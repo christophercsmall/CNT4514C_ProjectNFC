@@ -1,5 +1,7 @@
 package cnt4514c.unfsymposiumnfcquiz;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,10 @@ public class StartActivity extends AppCompatActivity {
     Tag myTag;
     TextView tagContents;
     boolean writeMode;
+    private View nfc_logo1View;
+    private View nfc_logo2View;
+    private Integer mShortAnimationDuration;
+
 
 
 
@@ -48,6 +55,16 @@ public class StartActivity extends AppCompatActivity {
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
         writeTagFilters = new IntentFilter[] { tagDetected };
+
+        nfc_logo1View = findViewById(R.id.nfc_image1);
+        nfc_logo2View = findViewById(R.id.nfc_image2);
+
+        // Initially hide the content view.
+        nfc_logo1View.setVisibility(View.GONE);
+
+        // Retrieve and cache the system's default "short" animation time.
+        mShortAnimationDuration = getResources().getInteger(
+                android.R.integer.config_longAnimTime);
     }
 
     public void readFromIntent(Intent intent) {
@@ -82,9 +99,11 @@ public class StartActivity extends AppCompatActivity {
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
             if (text.equals("START")){
-                startActivity(new Intent(StartActivity.this, QuestionActivity.class));
+
                 Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+                crossfade();
                 vib.vibrate(200);
+                //startActivity(new Intent(StartActivity.this, QuestionActivity.class));
             }
         } catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());
@@ -123,6 +142,33 @@ public class StartActivity extends AppCompatActivity {
         nfcAdapter.disableForegroundDispatch(this);
     }
 
+    private void crossfade() {
+
+        // Set the content view to 0% opacity but visible, so that it is visible
+        // (but fully transparent) during the animation.
+        nfc_logo1View.setAlpha(0f);
+        nfc_logo1View.setVisibility(View.VISIBLE);
+
+        // Animate the content view to 100% opacity, and clear any animation
+        // listener set on the view.
+        nfc_logo1View.animate()
+                .alpha(1f)
+                .setDuration(mShortAnimationDuration)
+                .setListener(null);
+
+        // Animate the loading view to 0% opacity. After the animation ends,
+        // set its visibility to GONE as an optimization step (it won't
+        // participate in layout passes, etc.)
+        nfc_logo2View.animate()
+                .alpha(0f)
+                .setDuration(mShortAnimationDuration)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        nfc_logo2View.setVisibility(View.GONE);
+                    }
+                });
+    }
 
 
 }
