@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_question"
     android:layout_width="match_parent"
@@ -11,85 +11,131 @@
     tools:context="cnt4514c.unfsymposiumnfcquiz.QuestionActivity">
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1">
+
+        <TableRow
+            android:background="#607D8B"
+            android:padding="5dp">
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/qText"
+                />
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
         <TableRow
             android:gravity="center"
             android:padding="50dp">
-            <ImageView
-                android:scaleType="centerInside"
-                android:layout_centerHorizontal="true"
+
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="200px"
-                android:src="@drawable/nfc_tag_image"/>
-        </TableRow>
+                android:layout_height="wrap_content">
 
-
-        <TableRow
-            android:gravity="center"
-            android:background="#607D8B"
-            android:padding="5dp">
-            <TextView
-                android:textAlignment="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/qText"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
-        </TableRow>
-
-
-        <TableRow
-            android:background="#607D8B"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_below="@id/qText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/aText1"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
-        </TableRow>
-
-        <TableRow
-            android:background="#607D8B"
-            android:padding="5dp">
-            <TextView
-                android:layout_below="@id/aText1"
-                android:id="@+id/aText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
-        </TableRow>
-
-        <TableRow
-            android:background="#607D8B"
-            android:padding="5dp">
-            <TextView
-                android:layout_below="@id/aText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/aText3"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
-        </TableRow>
-
-        <TableRow
-            android:background="#607D8B"
-            android:padding="5dp">
-            <TextView
-                android:layout_below="@id/aText3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/aText4"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
+                <ImageView
+                    android:id="@+id/nfc_image1"
+                    android:scaleType="centerInside"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200px"
+                    android:src="@drawable/nfc_tag_image">
+                </ImageView>
+                <ImageView
+                    android:id="@+id/nfc_image2"
+                    android:scaleType="centerInside"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200px"
+                    android:src="@drawable/nfc_tag_image3">
+                </ImageView>
+            </FrameLayout>
         </TableRow>
 
     </TableLayout>
 
-</RelativeLayout>
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:background="#607D8B"
+            android:padding="5dp"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:text="A: "
+                />
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/aText1" />
+
+        </TableRow>
+
+        <TableRow
+            android:background="#607D8B"
+            android:padding="5dp"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:text="A: "
+                />
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/aText2" />
+
+        </TableRow>
+        <TableRow
+            android:background="#607D8B"
+            android:padding="5dp"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:text="A: "
+                />
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/aText3" />
+
+        </TableRow>
+        <TableRow
+            android:background="#607D8B"
+            android:padding="5dp"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:text="A: "
+                />
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/aText4" />
+
+        </TableRow>
+
+
+
+    </TableLayout>
+
+</TableLayout>
