@@ -20,7 +20,6 @@ import java.util.List;
 
 public class QuestionActivity extends AppCompatActivity {
 
-    //
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
@@ -55,6 +54,9 @@ public class QuestionActivity extends AppCompatActivity {
 
         initializeQuiz();
         updateQuestionActivity();
+
+        Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        vib.vibrate(100);
     }
 
     public void readFromIntent(Intent intent) {
@@ -76,6 +78,8 @@ public class QuestionActivity extends AppCompatActivity {
 
     public void buildTagViews(NdefMessage[] msgs) {
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        long[] patternTru = {0, 90, 75, 90, 75, 90, 75, 750};
+        long[] patternFal = {0, 90, 75, 90};
 
         if (msgs == null || msgs.length == 0) return;
         String text = "";
@@ -89,14 +93,12 @@ public class QuestionActivity extends AppCompatActivity {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
-
-
             if (checkAns(text)){
-                vib.vibrate(200);
+                vib.vibrate(patternTru, -1);
                 updateQuestionActivity();
             }
             else{
-                vib.vibrate(1000);
+                vib.vibrate(patternFal, -1);
             }
 
         } catch (UnsupportedEncodingException e) {

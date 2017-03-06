@@ -28,6 +28,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
+
+
                     <ImageView
                         android:id="@+id/nfc_image1"
                         android:scaleType="centerInside"
@@ -37,17 +39,14 @@
                         android:src="@drawable/nfc_tag_image">
                     </ImageView>
 
-
                     <ImageView
                         android:id="@+id/nfc_image2"
                         android:scaleType="centerInside"
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="200px"
-                        android:src="@drawable/nfc_tag_image2">
+                        android:src="@drawable/nfc_tag_image3">
                     </ImageView>
-
-
                 </FrameLayout>
 
 
