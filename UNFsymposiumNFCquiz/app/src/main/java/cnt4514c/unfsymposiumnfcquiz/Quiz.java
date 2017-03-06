@@ -76,12 +76,30 @@ public class Quiz {
         Random rand = new Random();
         Integer randNum;
 
+        List<String> optLetters = new ArrayList<>();
+        Integer optCount;
+
+        optLetters.add("A");
+        optLetters.add("B");
+        optLetters.add("C");
+        optLetters.add("D");
+        optCount = optLetters.size();
+
         for (Integer x = optArrayOrd.size(); x > 0; x--){
             randNum = rand.nextInt(x);
             optRand = optArrayOrd.get(randNum); // get random string option for this option array
             optArrayOrd.remove((int) randNum); // remove from next random selection
+
+            // if this random option is the answer
+            if(optRand.equals(qOrd.aTxt)){
+                qRand.ansLetter = optLetters.get(optCount - x);
+            }
+
             optArrayRand.add(optRand); // add to random option array for this question
         }
+
+
+
         qRand.aOptions = optArrayRand;
         qRand.qTxt = qOrd.qTxt;
         qRand.aTxt = qOrd.aTxt;

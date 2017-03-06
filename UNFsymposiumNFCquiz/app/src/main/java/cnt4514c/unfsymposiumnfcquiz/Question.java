@@ -12,6 +12,7 @@ public class Question {
     public String qTxt;
     public String aTxt;
     public List<String> aOptions = new ArrayList<>();
+    public String ansLetter;
 
     public String getqTxt(){
         return this.qTxt;

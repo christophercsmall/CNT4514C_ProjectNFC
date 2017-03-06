@@ -24,7 +24,7 @@ public class QuestionActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
     Tag myTag;
-    TextView qText, aText1, aText2, aText3, aText4;
+    TextView qText, aText1, aText2, aText3, aText4, optTextA, optTextB, optTextC, optTextD;
     boolean writeMode;
     Quiz quiz = new Quiz();
 
@@ -38,6 +38,10 @@ public class QuestionActivity extends AppCompatActivity {
         aText2 = (TextView) findViewById(R.id.aText2);
         aText3 = (TextView) findViewById(R.id.aText3);
         aText4 = (TextView) findViewById(R.id.aText4);
+        optTextA = (TextView) findViewById(R.id.optLetterA);
+        optTextB = (TextView) findViewById(R.id.optLetterB);
+        optTextC = (TextView) findViewById(R.id.optLetterC);
+        optTextD = (TextView) findViewById(R.id.optLetterD);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
@@ -78,7 +82,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     public void buildTagViews(NdefMessage[] msgs) {
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        long[] patternTru = {0, 90, 75, 90, 75, 90, 75, 750};
+        long[] patternTru = {0, 90, 75, 90, 75, 90, 75, 800};
         long[] patternFal = {0, 90, 75, 90};
 
         if (msgs == null || msgs.length == 0) return;
@@ -122,6 +126,7 @@ public class QuestionActivity extends AppCompatActivity {
         aText2.setText(thisQ.aOptions.get(1));
         aText3.setText(thisQ.aOptions.get(2));
         aText4.setText(thisQ.aOptions.get(3));
+
     }
 
 //    public void nextQuestion(Integer qNum){
@@ -136,16 +141,10 @@ public class QuestionActivity extends AppCompatActivity {
 
     public boolean checkAns(String tagContents){
         boolean result = false;
-        List key = new ArrayList();
-        key.add("A");
-        key.add("B");
-        key.add("C");
-        key.add("D");
 
-        if (tagContents.equals("A")) {
+        if (tagContents.equals(quiz.qArray.get(quiz.currentQuestionNum).ansLetter)) {
             result = true;
             quiz.currentQuestionNum++;
-
         }
         return result;
     }

@@ -76,7 +76,8 @@
             <TextView
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:text="A: "
+                android:id="@+id/optLetterA"
+                android:text="@string/optLetterA"
                 />
             <TextView
                 android:layout_weight="1"
@@ -93,12 +94,12 @@
             <TextView
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:text="A: "
-                />
+                android:id="@+id/optLetterB"
+                android:text="@string/optLetterB"/>
             <TextView
                 android:layout_weight="1"
                 android:gravity="center"
-                android:id="@+id/aText2" />
+                android:id="@+id/aText2"/>
 
         </TableRow>
         <TableRow
@@ -109,12 +110,12 @@
             <TextView
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:text="A: "
-                />
+                android:id="@+id/optLetterC"
+                android:text="@string/optLetterC"/>
             <TextView
                 android:layout_weight="1"
                 android:gravity="center"
-                android:id="@+id/aText3" />
+                android:id="@+id/aText3"/>
 
         </TableRow>
         <TableRow
@@ -125,8 +126,8 @@
             <TextView
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:text="A: "
-                />
+                android:id="@+id/optLetterD"
+                android:text="@string/optLetterD"/>
             <TextView
                 android:layout_weight="1"
                 android:gravity="center"
