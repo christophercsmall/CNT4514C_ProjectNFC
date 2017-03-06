@@ -106,17 +106,22 @@ public class QuestionActivity extends AppCompatActivity {
         }
     }
 
-    public void updateQuestionActivity(){
-        //get question from array; index is referenced from object
-        qText.setText(quiz.qArray.get(quiz.currentQuestionNum).qTxt);
-    }
-
-
     public void initializeQuiz(){
         quiz.currentQuestionNum = 0;
         quiz.addQuestion("What does NFC stand for?", "Near Field Communication", "Native File Cache","Network Firewall Communication", "Native Framework Cache");
         quiz.addQuestion("How many bits are in a byte?", "8", "32", "100", "16");
         quiz.randomizeQuestions();
+    }
+
+    public void updateQuestionActivity(){
+        //get question from array; index is referenced from object
+        Question thisQ = quiz.qArray.get(quiz.currentQuestionNum);
+        qText.setText(thisQ.qTxt);
+        //later try to add dynamically sized options in activity
+        aText1.setText(thisQ.aOptions.get(0));
+        aText2.setText(thisQ.aOptions.get(1));
+        aText3.setText(thisQ.aOptions.get(2));
+        aText4.setText(thisQ.aOptions.get(3));
     }
 
 //    public void nextQuestion(Integer qNum){
