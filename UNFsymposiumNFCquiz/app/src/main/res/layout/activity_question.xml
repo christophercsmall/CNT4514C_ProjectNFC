@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/bg_black"
     tools:context="cnt4514c.unfsymposiumnfcquiz.QuestionActivity">
 
     <TableLayout
@@ -84,41 +85,6 @@
         </TableRow>
 
     </TableLayout>
-
-
-
-    <!--<TableLayout-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<TableRow-->
-            <!--android:gravity="center"-->
-            <!--android:padding="50dp">-->
-
-            <!--<FrameLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/nfc_image1"-->
-                    <!--android:scaleType="centerInside"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="200px"-->
-                    <!--android:src="@drawable/nfc_tag_image1">-->
-                <!--</ImageView>-->
-                <!--<ImageView-->
-                    <!--android:id="@+id/nfc_image2"-->
-                    <!--android:scaleType="centerInside"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="200px"-->
-                    <!--android:src="@drawable/nfc_tag_image2">-->
-                <!--</ImageView>-->
-            <!--</FrameLayout>-->
-        <!--</TableRow>-->
-
-    <!--</TableLayout>-->
 
     <TableLayout
         android:layout_width="fill_parent"

@@ -115,13 +115,16 @@ public class QuestionActivity extends AppCompatActivity {
 
             if (result){
                 vib.vibrate(patternTru, -1);
-                //show success activity
-                updateQuestionActivity();
+                mHandler.postDelayed(new Runnable(){
+                    public void run(){
+                        //show success activity
+                        updateQuestionActivity();
+                    }
+                }, 1500);
             }
             else{
                 vib.vibrate(patternFal, -1);
             }
-
         } catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());
         }
@@ -175,37 +178,6 @@ public class QuestionActivity extends AppCompatActivity {
                 }
             }, 1500);
         }
-
-
-
-//        // Retrieve and cache the system's default "short" animation time.
-//        animationDuration = getResources().getInteger(
-//                android.R.integer.config_shortAnimTime);
-//
-//        // Set the content view to 0% opacity but visible, so that it is visible
-//        // (but fully transparent) during the animation.
-//        nfc_logo2View.setAlpha(0f);
-//        nfc_logo2View.setVisibility(View.VISIBLE);
-//
-//        // Animate the content view to 100% opacity, and clear any animation
-//        // listener set on the view.
-//        nfc_logo2View.animate()
-//                .alpha(1f)
-//                .setDuration(animationDuration)
-//                .setListener(null);
-
-        // Animate the loading view to 0% opacity. After the animation ends,
-        // set its visibility to GONE as an optimization step (it won't
-        // participate in layout passes, etc.)
-//        nfc_logo1View.animate()
-//                .alpha(0f)
-//                .setDuration(animationDuration)
-//                .setListener(new AnimatorListenerAdapter() {
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        nfc_logo1View.setVisibility(View.GONE);
-//                    }
-//                });
     }
 
     @Override
