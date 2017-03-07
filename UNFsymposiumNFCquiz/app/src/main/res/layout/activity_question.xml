@@ -11,6 +11,61 @@
     tools:context="cnt4514c.unfsymposiumnfcquiz.QuestionActivity">
 
     <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:gravity="center"
+            android:padding="50dp">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/panel1">
+                </ImageView>
+
+
+                <ImageView
+                    android:id="@+id/nfc_image1"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="centerInside"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200px"
+                    android:src="@drawable/nfc_tag_image1">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/nfc_image2"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="centerInside"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200px"
+                    android:src="@drawable/nfc_tag_image_correct">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/nfc_image3"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="centerInside"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200px"
+                    android:src="@drawable/nfc_tag_image_wrong">
+                </ImageView>
+            </FrameLayout>
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:stretchColumns="0,1">
@@ -30,38 +85,40 @@
 
     </TableLayout>
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
 
-        <TableRow
-            android:gravity="center"
-            android:padding="50dp">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+    <!--<TableLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-                <ImageView
-                    android:id="@+id/nfc_image1"
-                    android:scaleType="centerInside"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200px"
-                    android:src="@drawable/nfc_tag_image">
-                </ImageView>
-                <ImageView
-                    android:id="@+id/nfc_image2"
-                    android:scaleType="centerInside"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200px"
-                    android:src="@drawable/nfc_tag_image3">
-                </ImageView>
-            </FrameLayout>
-        </TableRow>
+        <!--<TableRow-->
+            <!--android:gravity="center"-->
+            <!--android:padding="50dp">-->
 
-    </TableLayout>
+            <!--<FrameLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/nfc_image1"-->
+                    <!--android:scaleType="centerInside"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="200px"-->
+                    <!--android:src="@drawable/nfc_tag_image1">-->
+                <!--</ImageView>-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/nfc_image2"-->
+                    <!--android:scaleType="centerInside"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="200px"-->
+                    <!--android:src="@drawable/nfc_tag_image2">-->
+                <!--</ImageView>-->
+            <!--</FrameLayout>-->
+        <!--</TableRow>-->
+
+    <!--</TableLayout>-->
 
     <TableLayout
         android:layout_width="fill_parent"
@@ -134,9 +191,6 @@
                 android:id="@+id/aText4" />
 
         </TableRow>
-
-
-
     </TableLayout>
 
 </TableLayout>

@@ -29,16 +29,12 @@ public class StartActivity extends AppCompatActivity {
     Tag myTag;
     TextView tagContents;
     boolean writeMode;
-    private View nfc_logo1View;
-    private View nfc_logo2View;
-    private Integer animationDuration;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
-        tagContents = (TextView) findViewById(R.id.tagContents);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
@@ -135,9 +131,6 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void crossfade() {
-        nfc_logo1View = findViewById(R.id.nfc_image1);
-        nfc_logo2View = findViewById(R.id.nfc_image2);
-
         findViewById(R.id.nfc_image1).setVisibility(View.GONE);
 
         findViewById(R.id.nfc_image2).setVisibility(View.VISIBLE);

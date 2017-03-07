@@ -6,11 +6,14 @@ import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import java.util.List;
 
 public class QuestionActivity extends AppCompatActivity {
 
+    private Handler mHandler = new Handler();
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
@@ -32,6 +36,8 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         qText = (TextView) findViewById(R.id.qText);
         aText1 = (TextView) findViewById(R.id.aText1);
@@ -61,9 +67,15 @@ public class QuestionActivity extends AppCompatActivity {
 
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         vib.vibrate(100);
+
+        // Initially hide the content view.
+        findViewById(R.id.nfc_image2).setVisibility(View.GONE);
+        findViewById(R.id.nfc_image3).setVisibility(View.GONE);
+
     }
 
     public void readFromIntent(Intent intent) {
+
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
                 || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
@@ -81,6 +93,8 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     public void buildTagViews(NdefMessage[] msgs) {
+
+        boolean result = false;
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         long[] patternTru = {0, 90, 75, 90, 75, 90, 75, 800};
         long[] patternFal = {0, 90, 75, 90};
@@ -96,9 +110,12 @@ public class QuestionActivity extends AppCompatActivity {
         try {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
+            result = checkAns(text);
+            highlight(result);
 
-            if (checkAns(text)){
+            if (result){
                 vib.vibrate(patternTru, -1);
+                //show success activity
                 updateQuestionActivity();
             }
             else{
@@ -126,18 +143,7 @@ public class QuestionActivity extends AppCompatActivity {
         aText2.setText(thisQ.aOptions.get(1));
         aText3.setText(thisQ.aOptions.get(2));
         aText4.setText(thisQ.aOptions.get(3));
-
     }
-
-//    public void nextQuestion(Integer qNum){
-//        Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-//        String text = tagText;
-//        if (tagText.equals("A")){
-//        }
-//        else{
-//            vib.vibrate(1000);
-//        }
-//    }
 
     public boolean checkAns(String tagContents){
         boolean result = false;
@@ -147,6 +153,59 @@ public class QuestionActivity extends AppCompatActivity {
             quiz.currentQuestionNum++;
         }
         return result;
+    }
+
+    private void highlight(boolean result) {
+
+        if (result){
+            findViewById(R.id.nfc_image2).setVisibility(View.VISIBLE);
+
+            mHandler.postDelayed(new Runnable(){
+                public void run(){
+                    findViewById(R.id.nfc_image2).setVisibility(View.GONE);
+                }
+            }, 1500);
+        }
+        else{
+            findViewById(R.id.nfc_image3).setVisibility(View.VISIBLE);
+
+            mHandler.postDelayed(new Runnable(){
+                public void run(){
+                    findViewById(R.id.nfc_image3).setVisibility(View.GONE);
+                }
+            }, 1500);
+        }
+
+
+
+//        // Retrieve and cache the system's default "short" animation time.
+//        animationDuration = getResources().getInteger(
+//                android.R.integer.config_shortAnimTime);
+//
+//        // Set the content view to 0% opacity but visible, so that it is visible
+//        // (but fully transparent) during the animation.
+//        nfc_logo2View.setAlpha(0f);
+//        nfc_logo2View.setVisibility(View.VISIBLE);
+//
+//        // Animate the content view to 100% opacity, and clear any animation
+//        // listener set on the view.
+//        nfc_logo2View.animate()
+//                .alpha(1f)
+//                .setDuration(animationDuration)
+//                .setListener(null);
+
+        // Animate the loading view to 0% opacity. After the animation ends,
+        // set its visibility to GONE as an optimization step (it won't
+        // participate in layout passes, etc.)
+//        nfc_logo1View.animate()
+//                .alpha(0f)
+//                .setDuration(animationDuration)
+//                .setListener(new AnimatorListenerAdapter() {
+//                    @Override
+//                    public void onAnimationEnd(Animator animation) {
+//                        nfc_logo1View.setVisibility(View.GONE);
+//                    }
+//                });
     }
 
     @Override
@@ -162,6 +221,7 @@ public class QuestionActivity extends AppCompatActivity {
     public void onPause(){
         super.onPause();
         WriteModeOff();
+
     }
 
     @Override
