@@ -96,7 +96,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         boolean result = false;
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        long[] patternTru = {0, 90, 75, 90, 75, 90, 75, 800};
+        //long[] patternTru = {0, 90, 75, 90, 75, 90, 75, 800};
         long[] patternFal = {0, 90, 75, 90};
 
         if (msgs == null || msgs.length == 0) return;
@@ -114,10 +114,11 @@ public class QuestionActivity extends AppCompatActivity {
             highlight(result);
 
             if (result){
-                vib.vibrate(patternTru, -1);
+                //vib.vibrate(patternTru, -1);
+                startActivity(new Intent(QuestionActivity.this, SuccessActivity.class));
+
                 mHandler.postDelayed(new Runnable(){
                     public void run(){
-                        //show success activity
                         updateQuestionActivity();
                     }
                 }, 1500);
