@@ -1,25 +1,18 @@
 package cnt4514c.unfsymposiumnfcquiz;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Parcelable;
-import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -27,9 +20,7 @@ public class StartActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
     Tag myTag;
-    TextView tagContents;
     boolean writeMode;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
