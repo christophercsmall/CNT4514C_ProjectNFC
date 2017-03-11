@@ -6,4 +6,5 @@
     <string name="optLetterD">D: </string>
     <string name="correctText">That is correct!</string>
     <string name="touchStartText">Touch START tag to continue...</string>
+    <string name="currQnum"></string>
 </resources>
