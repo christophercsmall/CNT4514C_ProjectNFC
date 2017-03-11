@@ -65,9 +65,12 @@ public class SuccessActivity extends AppCompatActivity {
         currQnum.setText(qNum.toString());
     }
 
-    public void readFromIntent(Intent intent) {
+    @Override
+    public void onBackPressed(){
+        highlight(false);
+    }
 
-        qNum = intent.getIntExtra("qNum", 0);
+    public void readFromIntent(Intent intent) {
 
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
@@ -108,6 +111,7 @@ public class SuccessActivity extends AppCompatActivity {
                 result = true;
 
                 if(qNum.equals(qArrayLen)){
+                    finish();
                     startActivity(new Intent(SuccessActivity.this, FinalAnswerActivity.class));
                 }
             }

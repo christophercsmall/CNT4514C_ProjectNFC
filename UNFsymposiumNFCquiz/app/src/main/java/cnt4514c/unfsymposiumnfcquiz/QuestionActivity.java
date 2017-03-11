@@ -71,7 +71,11 @@ public class QuestionActivity extends AppCompatActivity {
         // Initially hide the content view.
         findViewById(R.id.nfc_image2).setVisibility(View.GONE);
         findViewById(R.id.nfc_image3).setVisibility(View.GONE);
+    }
 
+    @Override
+    public void onBackPressed(){
+        highlight(false);
     }
 
     public void readFromIntent(Intent intent) {
@@ -114,11 +118,11 @@ public class QuestionActivity extends AppCompatActivity {
             highlight(result);
 
             if (result){
-                Intent intent = new Intent(QuestionActivity.this, SuccessActivity.class);
-                intent.putExtra("qNum", quiz.currentQuestionNum);
-                intent.putExtra("qArrayLen", quiz.qArray.size());
+                Intent successIntent = new Intent(QuestionActivity.this, SuccessActivity.class);
+                successIntent.putExtra("qNum", quiz.currentQuestionNum);
+                successIntent.putExtra("qArrayLen", quiz.qArray.size());
                 //add any other data to pass to new activity
-                startActivity(intent);
+                startActivity(successIntent);
 
                 mHandler.postDelayed(new Runnable(){
                     public void run(){

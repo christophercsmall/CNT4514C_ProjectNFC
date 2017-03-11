@@ -12,4 +12,9 @@ public class FinalAnswerActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed(){
+        //highlight(false);
+    }
 }
