@@ -1,12 +1,10 @@
 package cnt4514c.unfsymposiumnfcquiz;
 
-import android.support.v4.content.res.TypedArrayUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Quiz {
+public class Quiz{
     public List<Question> qArray = new ArrayList<>();
     public List<Integer> qIDs = new ArrayList<>();
     public Integer currentQuestionNum;
@@ -14,6 +12,7 @@ public class Quiz {
     public List getQuestionIDs() {
         return this.qIDs;
     }
+
 
     public void addQuestion(String qString, String aString, String optString1, String optString2, String optString3){
 
@@ -107,5 +106,6 @@ public class Quiz {
 
         return qRand;
     }
+
 
 }

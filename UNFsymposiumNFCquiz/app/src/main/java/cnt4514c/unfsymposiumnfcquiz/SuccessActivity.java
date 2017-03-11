@@ -28,6 +28,7 @@ public class SuccessActivity extends AppCompatActivity {
     IntentFilter writeTagFilters[];
     Tag myTag;
     boolean writeMode;
+    Integer qNum, qArrayLen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +58,16 @@ public class SuccessActivity extends AppCompatActivity {
         findViewById(R.id.nfc_image2).setVisibility(View.GONE);
         findViewById(R.id.nfc_image3).setVisibility(View.GONE);
 
+        qNum = getIntent().getIntExtra("qNum", 0);
+        qArrayLen = getIntent().getIntExtra("qArrayLen", 0);
 
+        TextView currQnum = (TextView) findViewById(R.id.currQnum);
+        currQnum.setText(qNum.toString());
     }
 
     public void readFromIntent(Intent intent) {
+
+        qNum = intent.getIntExtra("qNum", 0);
 
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
@@ -99,6 +106,10 @@ public class SuccessActivity extends AppCompatActivity {
 
             if(text.equals("START")){
                 result = true;
+
+                if(qNum.equals(qArrayLen)){
+                    startActivity(new Intent(SuccessActivity.this, FinalAnswerActivity.class));
+                }
             }
             else{
                 result = false;

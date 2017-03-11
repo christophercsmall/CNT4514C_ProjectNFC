@@ -114,12 +114,17 @@ public class QuestionActivity extends AppCompatActivity {
             highlight(result);
 
             if (result){
-                //vib.vibrate(patternTru, -1);
-                startActivity(new Intent(QuestionActivity.this, SuccessActivity.class));
+                Intent intent = new Intent(QuestionActivity.this, SuccessActivity.class);
+                intent.putExtra("qNum", quiz.currentQuestionNum);
+                intent.putExtra("qArrayLen", quiz.qArray.size());
+                //add any other data to pass to new activity
+                startActivity(intent);
 
                 mHandler.postDelayed(new Runnable(){
                     public void run(){
-                        updateQuestionActivity();
+                        if(!quiz.currentQuestionNum.equals(quiz.qArray.size())){
+                            updateQuestionActivity();
+                        }
                     }
                 }, 1500);
             }
