@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">UNFsymposiumNFCquiz</string>
-    <string name="optLetterA">A: </string>
-    <string name="optLetterB">B: </string>
-    <string name="optLetterC">C: </string>
-    <string name="optLetterD">D: </string>
+    <string name="optLetterA">A</string>
+    <string name="optLetterB">B</string>
+    <string name="optLetterC">C</string>
+    <string name="optLetterD">D</string>
     <string name="correctText">That is correct!</string>
     <string name="touchStartText">Touch START tag to continue...</string>
 </resources>

@@ -97,29 +97,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        btnGoToQ1.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(MainActivity.this, Q1Activity.class));
-//                try {
-//                    if(myTag ==null) {
-//                        Toast.makeText(context, ERROR_DETECTED, Toast.LENGTH_LONG).show();
-//                    } else {
-//                        erase(myTag);
-//                        Toast.makeText(context, ERASE_SUCCESS, Toast.LENGTH_LONG ).show();
-//                    }
-//                } catch (IOException e) {
-//                    Toast.makeText(context, ERASE_ERROR, Toast.LENGTH_LONG ).show();
-//                    e.printStackTrace();
-//                } catch (FormatException e) {
-//                    Toast.makeText(context, ERASE_ERROR, Toast.LENGTH_LONG ).show();
-//                    e.printStackTrace();
-//                }
-            }
-        });
-
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
             // Stop here, we definitely need NFC
@@ -179,9 +156,9 @@ public class MainActivity extends Activity {
      /**********************************Write to NFC Tag****************************/
     private void write(String text, Tag tag) throws IOException, FormatException {
 
-        //NdefRecord.createApplicationRecord("cnt4514c.unfsymposiumnfcquiz")
+        //NdefRecord.createApplicationRecord("cnt4514c.unfsymposiumnfcquiz");
 
-        NdefRecord[] records = { createRecord(text) };
+        NdefRecord[] records = { createRecord(text), NdefRecord.createApplicationRecord("cnt4514c.unfsymposiumnfcquiz") };
         NdefMessage message = new NdefMessage(records);
         // Get an instance of Ndef for the tag.
         Ndef ndef = Ndef.get(tag);

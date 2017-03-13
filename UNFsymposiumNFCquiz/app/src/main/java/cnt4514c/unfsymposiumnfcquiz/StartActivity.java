@@ -20,7 +20,7 @@ public class StartActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
     Tag myTag;
-    boolean writeMode;
+    boolean writeMode, appStarted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class StartActivity extends AppCompatActivity {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
-            if (text.equals("START")){
+            if (text.equals("START") && appStarted){
                 crossfade();
                 startActivity(new Intent(StartActivity.this, QuestionActivity.class));
                 finish();
