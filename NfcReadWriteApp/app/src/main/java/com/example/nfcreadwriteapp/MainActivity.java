@@ -32,6 +32,8 @@ public class MainActivity extends Activity {
     public static final String WRITE_ERROR = "Error during writing, is the NFC tag close enough to your device?";
     public static final String ERASE_SUCCESS = "NFC tag data erased successfully!";
     public static final String ERASE_ERROR = "Error during erasing, is the NFC tag close enough to your device?";
+    public static final String LOCK_SUCCESS = "Tag is now Read-Only";
+    public static final String LOCK_ERROR = "There was an error making tag Read-only";
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
@@ -41,7 +43,7 @@ public class MainActivity extends Activity {
 
     TextView tvNFCContent;
     TextView message;
-    Button btnWrite, btnClear, btnGoToQ1;
+    Button btnWrite, btnClear, btnLockTag;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class MainActivity extends Activity {
         message = (TextView) findViewById(R.id.edit_message);
         btnWrite = (Button) findViewById(R.id.button);
         btnClear = (Button) findViewById(R.id.btnClear);
-        btnGoToQ1 = (Button) findViewById(R.id.btnGoToQ1);
+        btnLockTag = (Button) findViewById(R.id.btnLockTag);
 
         btnWrite.setOnClickListener(new View.OnClickListener()
         {
@@ -92,6 +94,23 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 } catch (FormatException e) {
                     Toast.makeText(context, ERASE_ERROR, Toast.LENGTH_LONG ).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        btnLockTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (myTag == null) {
+                        Toast.makeText(context, ERROR_DETECTED, Toast.LENGTH_LONG).show();
+                    } else {
+                        lockTag(myTag);
+                        Toast.makeText(context, LOCK_SUCCESS, Toast.LENGTH_LONG).show();
+                    }
+                } catch (IOException e) {
+                    Toast.makeText(context, LOCK_ERROR, Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
@@ -180,6 +199,16 @@ public class MainActivity extends Activity {
         // Write the message
         ndef.writeNdefMessage(message);
         // Close the connection
+        ndef.close();
+    }
+
+    public void lockTag(Tag tag) throws IOException {
+        Ndef ndef = Ndef.get(tag);
+        ndef.connect();
+        if (ndef.canMakeReadOnly()){
+            ndef.makeReadOnly();
+            //Toast.makeText(context, "canMakeReadOnly = true", Toast.LENGTH_LONG ).show();
+        }
         ndef.close();
     }
 

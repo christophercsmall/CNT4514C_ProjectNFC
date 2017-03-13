@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="Write"
             style="@android:style/Widget.Button"
-            android:layout_weight="0.07" />
+            android:layout_weight=".5" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,11 +46,11 @@
 
         <Button
             android:id="@+id/btnClear"
-            android:layout_width="71dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Clear"
             style="@android:style/Widget.Button"
-            android:layout_weight="0.20" />
+            android:layout_weight=".5" />
     </LinearLayout>
 
     <LinearLayout
@@ -59,22 +59,19 @@
         android:layout_marginTop="20sp">
 
         <TextView
-            android:id="@+id/btnGoToQ1_message"
+            android:id="@+id/btnLockTag_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="@string/btnLock_message" />
 
         <Button
-            android:id="@+id/btnGoToQ1"
+            android:id="@+id/btnLockTag"
+            android:layout_weight="0.40"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lock Tag\n(Permanent)"
+            android:text="Lock Tag \n(Permanent)"
             style="@android:style/Widget.Button" />
-
-
-
-
 
     </LinearLayout>
 
