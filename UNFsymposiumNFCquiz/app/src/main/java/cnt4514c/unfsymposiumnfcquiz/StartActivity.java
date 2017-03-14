@@ -20,12 +20,15 @@ public class StartActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
     Tag myTag;
-    boolean writeMode, appStarted;
+    boolean writeMode;
+    Integer readyCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
@@ -33,6 +36,8 @@ public class StartActivity extends AppCompatActivity {
             Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
             finish();
         }
+
+        readyCode = -1;
         readFromIntent(getIntent());
 
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
@@ -45,6 +50,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void readFromIntent(Intent intent) {
+
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
                 || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
@@ -58,12 +64,15 @@ public class StartActivity extends AppCompatActivity {
                 }
             }
             buildTagViews(msgs);
-
+            readyCode = 0;
+        }
+        else{
+            readyCode = 1;
         }
     }
 
     public void buildTagViews(NdefMessage[] msgs) {
-        crossfade();
+
         if (msgs == null || msgs.length == 0) return;
 
         String text = "";
@@ -77,7 +86,7 @@ public class StartActivity extends AppCompatActivity {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
-            if (text.equals("START") && appStarted){
+            if (text.equals("START") && readyCode.equals(0) || readyCode.equals(1)){
                 crossfade();
                 startActivity(new Intent(StartActivity.this, QuestionActivity.class));
                 finish();
@@ -100,14 +109,12 @@ public class StartActivity extends AppCompatActivity {
     public void onPause(){
         super.onPause();
         WriteModeOff();
-
     }
 
     @Override
     public void onResume(){
         super.onResume();
         WriteModeOn();
-
     }
 
     /**********************************Enable Write********************************/
