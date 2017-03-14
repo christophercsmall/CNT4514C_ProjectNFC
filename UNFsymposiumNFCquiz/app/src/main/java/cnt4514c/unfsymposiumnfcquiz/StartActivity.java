@@ -86,7 +86,7 @@ public class StartActivity extends AppCompatActivity {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
-            if (text.equals("START") && readyCode.equals(0) || readyCode.equals(1)){
+            if (text.equals("START") && (readyCode.equals(0) || readyCode.equals(1))){
                 crossfade();
                 startActivity(new Intent(StartActivity.this, QuestionActivity.class));
                 finish();

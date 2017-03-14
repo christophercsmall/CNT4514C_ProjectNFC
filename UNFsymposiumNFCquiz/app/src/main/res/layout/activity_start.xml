@@ -54,11 +54,7 @@
                         android:layout_height="150px"
                         android:src="@drawable/nfc_tag_image_correct">
                     </ImageView>
-
-
                 </FrameLayout>
-
-
 
             </TableRow>
 
