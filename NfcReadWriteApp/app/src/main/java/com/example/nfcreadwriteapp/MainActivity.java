@@ -173,10 +173,9 @@ public class MainActivity extends Activity {
 
 
      /**********************************Write to NFC Tag****************************/
+
+     //add to poster
     private void write(String text, Tag tag) throws IOException, FormatException {
-
-        //NdefRecord.createApplicationRecord("cnt4514c.unfsymposiumnfcquiz");
-
         NdefRecord[] records = { createRecord(text), NdefRecord.createApplicationRecord("cnt4514c.unfsymposiumnfcquiz") };
         NdefMessage message = new NdefMessage(records);
         // Get an instance of Ndef for the tag.
@@ -202,12 +201,12 @@ public class MainActivity extends Activity {
         ndef.close();
     }
 
+    //add this to poster
     public void lockTag(Tag tag) throws IOException {
         Ndef ndef = Ndef.get(tag);
         ndef.connect();
         if (ndef.canMakeReadOnly()){
             ndef.makeReadOnly();
-            //Toast.makeText(context, "canMakeReadOnly = true", Toast.LENGTH_LONG ).show();
         }
         ndef.close();
     }
