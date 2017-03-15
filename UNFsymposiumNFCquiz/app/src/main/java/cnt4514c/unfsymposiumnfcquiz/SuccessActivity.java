@@ -61,8 +61,8 @@ public class SuccessActivity extends AppCompatActivity {
         qNum = getIntent().getIntExtra("qNum", 0);
         qArrayLen = getIntent().getIntExtra("qArrayLen", 0);
 
-        TextView currQnum = (TextView) findViewById(R.id.currQnum);
-        currQnum.setText(qNum.toString());
+        //TextView currQnum = (TextView) findViewById(R.id.currQnum);
+        //currQnum.setText(qNum.toString());
     }
 
     @Override

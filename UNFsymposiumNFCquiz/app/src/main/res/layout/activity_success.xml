@@ -1,128 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:id="@+id/activity_success"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/bg_black"
     tools:context="cnt4514c.unfsymposiumnfcquiz.SuccessActivity">
 
-    <TableLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <TableRow
-            android:gravity="center"
-            android:padding="50dp">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
+            <TableRow
+                android:gravity="center"
+                android:padding="50dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:scaleType="fitXY"
-                    android:layout_gravity="center"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:background="@drawable/panel2">
-                </ImageView>
-
-
-                <ImageView
-                    android:id="@+id/nfc_image1"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="centerInside"
-                    android:layout_centerHorizontal="true"
+                <FrameLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="150px"
-                    android:src="@drawable/nfc_tag_image1">
-                </ImageView>
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/nfc_image2"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="centerInside"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150px"
-                    android:src="@drawable/nfc_tag_image_correct">
-                </ImageView>
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        android:background="@drawable/shadowframe">
+                    </ImageView>
 
-                <ImageView
-                    android:id="@+id/nfc_image3"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="centerInside"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150px"
-                    android:src="@drawable/nfc_tag_image_wrong">
-                </ImageView>
-            </FrameLayout>
-        </TableRow>
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        android:background="@drawable/panel2">
+                    </ImageView>
 
-    </TableLayout>
+                    <ImageView
+                        android:id="@+id/nfc_image1"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="centerInside"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150px"
+                        android:src="@drawable/nfc_tag_image1">
+                    </ImageView>
+
+                    <ImageView
+                        android:id="@+id/nfc_image2"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="centerInside"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150px"
+                        android:src="@drawable/nfc_tag_image_correct">
+                    </ImageView>
+                    <ImageView
+                        android:id="@+id/nfc_image3"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="centerInside"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150px"
+                        android:src="@drawable/nfc_tag_image_wrong">
+                    </ImageView>
+                </FrameLayout>
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
 
 
-    <TableLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TableRow
-            android:background="#000000"
-            android:padding="5dp"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:layout_height="350px"
+            android:layout_width="match_parent"
+            android:src="@drawable/goldseal"
+            android:layout_gravity="center"/>
 
-            <TextView
-                android:textColor="#FFFFFF"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/correctText"/>
-        </TableRow>
+        <TextView
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginTop="80dp"
+            android:layout_gravity="center"
+            android:textColor="#00ff00"
+            android:text="@string/correctText"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+    </FrameLayout>
 
-    </TableLayout>
-
-
-    <TableLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TableRow
-            android:background="#000000"
-            android:padding="5dp"
-            android:gravity="center"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:textColor="#FFFFFF"
+
+            <ImageView
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/bluewave1"
+                android:id="@+id/imageView">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/startMsg"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:textAlignment="center"
                 android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:text="@string/touchStartText"/>
-        </TableRow>
-    </TableLayout>
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </FrameLayout>
 
-        <TableRow
-            android:background="#000000"
-            android:padding="5dp"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/currQnum"
-                android:textColor="#FFFFFF"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </TableRow>
+    </RelativeLayout>
 
-    </TableLayout>
-
-</TableLayout>
+</LinearLayout>
