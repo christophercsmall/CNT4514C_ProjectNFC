@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_black"
-
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="cnt4514c.unfsymposiumnfcquiz.StartActivity">
 
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -21,11 +20,18 @@
 
             <TableRow
                 android:gravity="center"
-                android:padding="50dp">
+                android:padding="40dp">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        android:background="@drawable/shadowframe">
+                    </ImageView>
 
                     <ImageView
                         android:layout_gravity="center"
@@ -72,8 +78,8 @@
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/bluewave1"
+                android:layout_height="130dp"
+                android:background="@drawable/bluewave"
                 android:id="@+id/imageView">
             </ImageView>
 

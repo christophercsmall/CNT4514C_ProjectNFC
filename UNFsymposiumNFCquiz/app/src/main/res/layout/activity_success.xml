@@ -5,7 +5,7 @@
     android:id="@+id/activity_success"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_black"
+    android:background="@drawable/bg_bluegreen"
     tools:context="cnt4514c.unfsymposiumnfcquiz.SuccessActivity">
 
     <RelativeLayout
@@ -18,7 +18,7 @@
 
             <TableRow
                 android:gravity="center"
-                android:padding="50dp"
+                android:padding="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -78,51 +78,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+
         <ImageView
-            android:layout_height="350px"
+            android:layout_height="600px"
             android:layout_width="match_parent"
-            android:src="@drawable/goldseal"
+            android:src="@drawable/successribbon"
             android:layout_gravity="center"/>
 
         <TextView
+            android:layout_gravity="center"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:layout_marginTop="80dp"
-            android:layout_gravity="center"
-            android:textColor="#00ff00"
+            android:textColor="#ffffff"
             android:text="@string/correctText"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+            android:gravity="center"
+            android:layout_height="40dp"
+            android:layout_width="100dp"
+            android:background="@drawable/shadowframe"
+            android:layout_marginBottom="40dp"/>
+
     </FrameLayout>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <FrameLayout
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textSize="17dp"
+            android:id="@+id/startMsg"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:text="@string/touchStartText"/>
 
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/bluewave1"
-                android:id="@+id/imageView">
-            </ImageView>
-
-            <TextView
-                android:id="@+id/startMsg"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:textAlignment="center"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="@string/touchStartText"/>
-
-        </FrameLayout>
-
-    </RelativeLayout>
+    </FrameLayout>
 
 </LinearLayout>
