@@ -8,12 +8,14 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.os.SystemClock;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.UnsupportedEncodingException;
@@ -25,7 +27,9 @@ public class QuestionActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
     Tag myTag;
-    TextView qText, aText1, aText2, aText3, aText4, optTextA, optTextB, optTextC, optTextD;
+    TextView qText, aText1, aText2, aText3, aText4;
+    Chronometer chron;
+    String time;
     boolean writeMode;
     Quiz quiz = new Quiz();
 
@@ -41,10 +45,7 @@ public class QuestionActivity extends AppCompatActivity {
         aText2 = (TextView) findViewById(R.id.aText2);
         aText3 = (TextView) findViewById(R.id.aText3);
         aText4 = (TextView) findViewById(R.id.aText4);
-        optTextA = (TextView) findViewById(R.id.optLetterA);
-        optTextB = (TextView) findViewById(R.id.optLetterB);
-        optTextC = (TextView) findViewById(R.id.optLetterC);
-        optTextD = (TextView) findViewById(R.id.optLetterD);
+        chron = (Chronometer) findViewById(R.id.chron);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
@@ -68,6 +69,11 @@ public class QuestionActivity extends AppCompatActivity {
         // Initially hide the content view.
         findViewById(R.id.nfc_image2).setVisibility(View.GONE);
         findViewById(R.id.nfc_image3).setVisibility(View.GONE);
+
+        chron.setBase(SystemClock.elapsedRealtime());
+        chron.setFormat("%s");
+        chron.start();
+
     }
 
     @Override
@@ -115,9 +121,14 @@ public class QuestionActivity extends AppCompatActivity {
             highlight(result);
 
             if (result){
+
+                long timeElapsed = SystemClock.elapsedRealtime() - chron.getBase();
+
                 Intent successIntent = new Intent(QuestionActivity.this, SuccessActivity.class);
                 successIntent.putExtra("qNum", quiz.currentQuestionNum);
                 successIntent.putExtra("qArrayLen", quiz.qArray.size());
+                successIntent.putExtra("correctCount", quiz.correctCount);
+                successIntent.putExtra("time", timeElapsed);
                 //add any other data to pass to new activity
                 startActivity(successIntent);
 
@@ -139,6 +150,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     public void initializeQuiz(){
         quiz.currentQuestionNum = 0;
+        quiz.correctCount = 0;
         quiz.addQuestion("What does NFC stand for?", "Near Field Communication", "Native File Cache","Network Firewall Communication", "Native Framework Cache");
         quiz.addQuestion("How many bits are in a byte?", "8", "32", "100", "16");
         quiz.randomizeQuestions();
@@ -161,6 +173,7 @@ public class QuestionActivity extends AppCompatActivity {
         if (tagContents.equals(quiz.qArray.get(quiz.currentQuestionNum).ansLetter)) {
             result = true;
             quiz.currentQuestionNum++;
+            quiz.correctCount++;
         }
         return result;
     }

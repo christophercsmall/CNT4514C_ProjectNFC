@@ -8,6 +8,7 @@ public class Quiz{
     public List<Question> qArray = new ArrayList<>();
     public List<Integer> qIDs = new ArrayList<>();
     public Integer currentQuestionNum;
+    public Integer correctCount;
 
     public List getQuestionIDs() {
         return this.qIDs;

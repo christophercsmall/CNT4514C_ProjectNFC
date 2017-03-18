@@ -28,12 +28,16 @@ public class SuccessActivity extends AppCompatActivity {
     IntentFilter writeTagFilters[];
     Tag myTag;
     boolean writeMode;
-    Integer qNum, qArrayLen;
+    Integer qNum, qArrayLen, correctCount;
+    long timeElapsed;
+    TextView successMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
+
+        successMsg = (TextView) findViewById(R.id.successMsg);
 
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         long[] patternTru = {0, 90, 75, 90, 75, 90, 75, 800};
@@ -60,9 +64,10 @@ public class SuccessActivity extends AppCompatActivity {
 
         qNum = getIntent().getIntExtra("qNum", 0);
         qArrayLen = getIntent().getIntExtra("qArrayLen", 0);
+        correctCount = getIntent().getIntExtra("correctCount", 0);
+        timeElapsed = getIntent().getLongExtra("time", 0);
 
-        //TextView currQnum = (TextView) findViewById(R.id.currQnum);
-        //currQnum.setText(qNum.toString());
+        successMsg.setText(Long.toString(timeElapsed));
     }
 
     @Override
@@ -111,8 +116,13 @@ public class SuccessActivity extends AppCompatActivity {
                 result = true;
 
                 if(qNum.equals(qArrayLen)){
+                    Intent congratsIntent = new Intent(SuccessActivity.this, CongratsActivity.class);
+                    congratsIntent.putExtra("qArrayLen", qArrayLen);
+                    congratsIntent.putExtra("correctCount", correctCount);
+                    // pass chron time
+                    //add any other data to pass to new activity
+                    startActivity(congratsIntent);
                     finish();
-                    startActivity(new Intent(SuccessActivity.this, FinalAnswerActivity.class));
                 }
             }
             else{

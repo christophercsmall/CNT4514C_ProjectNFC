@@ -42,7 +42,6 @@
 
         <activity android:name=".SuccessActivity" />
         <activity android:name=".CongratsActivity" />
-        <activity android:name=".FinalAnswerActivity"></activity>
     </application>
 
 </manifest>
