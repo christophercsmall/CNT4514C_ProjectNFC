@@ -5,33 +5,63 @@
     android:id="@+id/activity_success"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical"
     android:background="@drawable/bg_bluegreen"
     tools:context="cnt4514c.unfsymposiumnfcquiz.CongratsActivity">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_height="600px"
+        <FrameLayout
+            android:id="@+id/ribbonFrame"
             android:layout_width="match_parent"
-            android:src="@drawable/successribbon"
-            android:layout_gravity="center"/>
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/correctMsg"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="#ffffff"
-            android:text="@string/correctText"
-            android:gravity="center"
-            android:layout_height="40dp"
-            android:layout_width="100dp"
-            android:background="@drawable/shadowframe"
-            android:layout_marginBottom="40dp"/>
+            <ImageView
+                android:id="@+id/ribbon"
+                android:layout_height="600px"
+                android:layout_width="match_parent"
+                android:src="@drawable/successribbon"
+                android:layout_gravity="center"/>
 
-    </FrameLayout>
+            <TextView
+                android:id="@+id/correctMsg"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:text="@string/correctText"
+                android:gravity="center"
+                android:layout_height="40dp"
+                android:layout_width="100dp"
+                android:background="@drawable/shadowframe"
+                android:layout_marginBottom="40dp"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_below="@id/ribbonFrame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/timeMsg"
+                android:text="00:00"
+                android:textStyle="bold"
+                android:textSize="50dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/shadowglassbox" />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+
 
 
 </LinearLayout>
+
+
