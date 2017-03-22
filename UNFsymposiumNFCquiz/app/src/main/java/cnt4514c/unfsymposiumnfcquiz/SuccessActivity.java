@@ -29,7 +29,7 @@ public class SuccessActivity extends AppCompatActivity {
     Tag myTag;
     boolean writeMode;
     Integer qNum, qArrayLen, correctCount;
-    long timeElapsed;
+    String timeElapsed;
     TextView successMsg;
 
     @Override
@@ -65,9 +65,7 @@ public class SuccessActivity extends AppCompatActivity {
         qNum = getIntent().getIntExtra("qNum", 0);
         qArrayLen = getIntent().getIntExtra("qArrayLen", 0);
         correctCount = getIntent().getIntExtra("correctCount", 0);
-        timeElapsed = getIntent().getLongExtra("time", 0);
-
-        successMsg.setText(Long.toString(timeElapsed));
+        timeElapsed = getIntent().getStringExtra("time");
     }
 
     @Override
@@ -97,7 +95,7 @@ public class SuccessActivity extends AppCompatActivity {
 
         boolean result = false;
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        long[] patternTru = {0, 10, 20, 10, 20, 10};
+        long[] patternTru = {0, 20};
         long[] patternFal = {0, 90, 75, 90};
 
         if (msgs == null || msgs.length == 0) return;
@@ -119,7 +117,8 @@ public class SuccessActivity extends AppCompatActivity {
                     Intent congratsIntent = new Intent(SuccessActivity.this, CongratsActivity.class);
                     congratsIntent.putExtra("qArrayLen", qArrayLen);
                     congratsIntent.putExtra("correctCount", correctCount);
-                    // pass chron time
+                    congratsIntent.putExtra("time", timeElapsed);
+                    QuestionActivity.chron.stop();
                     //add any other data to pass to new activity
                     startActivity(congratsIntent);
                     finish();

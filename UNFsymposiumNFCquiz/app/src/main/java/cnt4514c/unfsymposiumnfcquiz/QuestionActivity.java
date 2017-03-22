@@ -1,4 +1,5 @@
 package cnt4514c.unfsymposiumnfcquiz;
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.os.SystemClock;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,6 +21,7 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.TimeUnit;
 
 public class QuestionActivity extends AppCompatActivity {
 
@@ -28,8 +31,7 @@ public class QuestionActivity extends AppCompatActivity {
     IntentFilter writeTagFilters[];
     Tag myTag;
     TextView qText, aText1, aText2, aText3, aText4;
-    Chronometer chron;
-    String time;
+    static Chronometer chron;
     boolean writeMode;
     Quiz quiz = new Quiz();
 
@@ -124,11 +126,14 @@ public class QuestionActivity extends AppCompatActivity {
 
                 long timeElapsed = SystemClock.elapsedRealtime() - chron.getBase();
 
+                String time = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(timeElapsed),
+                                                         TimeUnit.MILLISECONDS.toSeconds(timeElapsed) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeElapsed)));
+
                 Intent successIntent = new Intent(QuestionActivity.this, SuccessActivity.class);
                 successIntent.putExtra("qNum", quiz.currentQuestionNum);
                 successIntent.putExtra("qArrayLen", quiz.qArray.size());
                 successIntent.putExtra("correctCount", quiz.correctCount);
-                successIntent.putExtra("time", timeElapsed);
+                successIntent.putExtra("time", time);
                 //add any other data to pass to new activity
                 startActivity(successIntent);
 
@@ -136,6 +141,9 @@ public class QuestionActivity extends AppCompatActivity {
                     public void run(){
                         if(!quiz.currentQuestionNum.equals(quiz.qArray.size())){
                             updateQuestionActivity();
+                        }
+                        else{
+                            finish();
                         }
                     }
                 }, 1500);
