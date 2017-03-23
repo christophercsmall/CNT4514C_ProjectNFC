@@ -161,6 +161,14 @@ public class QuestionActivity extends AppCompatActivity {
         quiz.correctCount = 0;
         quiz.addQuestion("What does NFC stand for?", "Near Field Communication", "Native File Cache","Network Firewall Communication", "Native Framework Cache");
         quiz.addQuestion("How many bits are in a byte?", "8", "32", "100", "16");
+        quiz.addQuestion("At what frequency do NFC tags operate when transmitting data?", "13.56 megahertz", "125 kilohertz", "2.4 gigahertz", "800 megahertz");
+        quiz.addQuestion("By changing static lock bits from 0 to 1, NFC tags are programmed to be 'Read-Only'. The tag's previously written data can then be changed...", "never again", "by touching a strong magnet to erase all memory", "by using a specific frequency to reset lock bits", "by using pulsed voltage (similar to EEPROM)");
+        quiz.addQuestion("The acronym 'NDEF' stands for...", "NFC Data Exchange Format", "Non-Dynamic Extensible Format", "Node Defined Electronic File", "Natively Distributed Electric Field");
+        quiz.addQuestion("The Android Operating System began supporting NFC-enabled devices at Android Version...", "2.3 (Gingerbread)", "4.0 (Ice Cream Sandwich)", "2.2 (Froyo)", "4.1 (Jelly Bean)");
+        quiz.addQuestion("Which organization defines transmission protocols for communicating with contactless integrated circuits such as NFC tags?", "ISO/IEC", "IEEE", "NXP", "IETF");
+        quiz.addQuestion("Mobile devices can send energy over radio waves to NFC tags to transmit messages. This method is called...", "Electromagnetic Induction", "Bidirectional Transduction", "Piezoelectricity", "Electrostatic Transmission");
+        quiz.addQuestion("When a mobile device attempts to write onto an NFC tag, the tag's previous data is...", "overwritten up to the length of the new data", "rewritten behind the new data", "completely erased", "unchanged if there is enough unallocated storage");
+        quiz.addQuestion("NFC tags can have either a 'wet' or 'dry' inlay. This refers to...", "the presence of an adhesive glue", "whether it can operate in moisture", "whether the antenna was formed in an electrolytic bath", "the tag's optimal environmental conditions");
         quiz.randomizeQuestions();
     }
 
