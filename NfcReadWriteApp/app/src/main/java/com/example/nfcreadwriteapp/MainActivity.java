@@ -57,6 +57,38 @@ public class MainActivity extends Activity {
         btnClear = (Button) findViewById(R.id.btnClear);
         btnLockTag = (Button) findViewById(R.id.btnLockTag);
 
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if (nfcAdapter == null) {
+            // Stop here, we definitely need NFC
+            Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
+            finish();
+        }
+        readFromIntent(getIntent());
+
+        pendingIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+
+        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
+        tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
+        writeTagFilters = new IntentFilter[] { tagDetected };
+
+        btnLockTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (myTag == null) {
+                        Toast.makeText(context, ERROR_DETECTED, Toast.LENGTH_LONG).show();
+                    } else {
+                        lockTag(myTag);
+                        Toast.makeText(context, LOCK_SUCCESS, Toast.LENGTH_LONG).show();
+                    }
+                } catch (IOException e) {
+                    Toast.makeText(context, LOCK_ERROR, Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+
         btnWrite.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -98,36 +130,6 @@ public class MainActivity extends Activity {
                 }
             }
         });
-
-        btnLockTag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (myTag == null) {
-                        Toast.makeText(context, ERROR_DETECTED, Toast.LENGTH_LONG).show();
-                    } else {
-                        lockTag(myTag);
-                        Toast.makeText(context, LOCK_SUCCESS, Toast.LENGTH_LONG).show();
-                    }
-                } catch (IOException e) {
-                    Toast.makeText(context, LOCK_ERROR, Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if (nfcAdapter == null) {
-            // Stop here, we definitely need NFC
-            Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
-            finish();
-        }
-        readFromIntent(getIntent());
-
-        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
-        tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
-        writeTagFilters = new IntentFilter[] { tagDetected };
     }
 
 
@@ -148,24 +150,18 @@ public class MainActivity extends Activity {
             buildTagViews(msgs);
         }
     }
-
     private void buildTagViews(NdefMessage[] msgs) {
         if (msgs == null || msgs.length == 0) return;
-
         String text = "";
-//        String tagId = new String(msgs[0].getRecords()[0].getType());
         byte[] payload = msgs[0].getRecords()[0].getPayload();
         String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16"; // Get the Text Encoding
         int languageCodeLength = payload[0] & 0063; // Get the Language Code, e.g. "en"
-        // String languageCode = new String(payload, 1, languageCodeLength, "US-ASCII");
-
         try {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
         } catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());
         }
-
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         vib.vibrate(500);
         tvNFCContent.setText("NFC Content: " + text);
@@ -202,6 +198,7 @@ public class MainActivity extends Activity {
     }
 
     //add this to poster
+
     public void lockTag(Tag tag) throws IOException {
         Ndef ndef = Ndef.get(tag);
         ndef.connect();
