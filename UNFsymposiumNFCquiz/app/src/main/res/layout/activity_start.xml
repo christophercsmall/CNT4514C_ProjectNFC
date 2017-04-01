@@ -78,7 +78,7 @@
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="180dp"
                 android:background="@drawable/bluewave"
                 android:id="@+id/imageView">
             </ImageView>
