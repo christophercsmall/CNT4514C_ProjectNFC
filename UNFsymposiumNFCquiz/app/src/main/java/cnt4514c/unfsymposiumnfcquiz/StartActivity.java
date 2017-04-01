@@ -3,6 +3,7 @@ package cnt4514c.unfsymposiumnfcquiz;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.PorterDuff;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 import java.io.UnsupportedEncodingException;
 
@@ -23,10 +25,16 @@ public class StartActivity extends AppCompatActivity {
     boolean writeMode;
     Integer readyCode;
 
+    EditText fName, lName, email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        fName = (EditText) findViewById(R.id.first);
+        lName = (EditText) findViewById(R.id.last);
+        email = (EditText) findViewById(R.id.email);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
