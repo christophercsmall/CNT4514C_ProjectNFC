@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:id="@+id/activity_success"
+    android:id="@+id/activity_congrats"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
@@ -11,9 +11,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <FrameLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/ribbonFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -49,18 +51,20 @@
                 android:id="@+id/timeMsg"
                 android:text="00:00"
                 android:textStyle="bold"
-                android:textSize="50dp"
+                android:textSize="100dp"
                 android:textColor="@color/colorGold"
                 android:gravity="center"
                 android:layout_height="200dp"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/shadowglassbox" />
         </FrameLayout>
 
-        <FrameLayout
+        <RelativeLayout
+            android:gravity="bottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/timeFrame">
 
             <TextView
@@ -70,15 +74,12 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
-                android:textSize="17dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
-                android:text=" Touch Submit Tag to Upload Score "/>
-        </FrameLayout>
+                android:text=" Touch SUBMIT tag to upload score "/>
+        </RelativeLayout>
 
     </RelativeLayout>
-
-
-
 
 </LinearLayout>
 
