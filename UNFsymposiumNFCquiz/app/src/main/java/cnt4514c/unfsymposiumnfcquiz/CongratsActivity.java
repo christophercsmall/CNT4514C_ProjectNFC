@@ -10,6 +10,7 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,6 +63,15 @@ public class CongratsActivity extends AppCompatActivity {
 
     }
 
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+
+            //do something
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     public void readFromIntent(Intent intent) {
 
         String action = intent.getAction();
@@ -94,11 +104,10 @@ public class CongratsActivity extends AppCompatActivity {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
-            if(text.equals("START") ||
-                    text.equals("A") ||
-                    text.equals("B") ||
-                    text.equals("C") ||
-                    text.equals("D")){
+            if(text.equals("SUBMIT")){
+                //n00931863.sytes.net
+                //add fname, lname, email, score
+                //
                 finish();
             }
             else{

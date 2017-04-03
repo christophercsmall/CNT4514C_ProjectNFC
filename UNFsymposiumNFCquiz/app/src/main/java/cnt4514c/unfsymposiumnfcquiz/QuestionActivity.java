@@ -13,6 +13,7 @@ import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Chronometer;
@@ -81,6 +82,14 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         highlight(false);
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            highlight(false);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public void readFromIntent(Intent intent) {

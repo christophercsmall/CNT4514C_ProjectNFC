@@ -40,6 +40,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/timeFrame"
             android:layout_below="@id/ribbonFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -49,12 +50,29 @@
                 android:text="00:00"
                 android:textStyle="bold"
                 android:textSize="50dp"
-                android:textColor="#ffffff"
+                android:textColor="@color/colorGold"
                 android:gravity="center"
                 android:layout_height="200dp"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 android:background="@drawable/shadowglassbox" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeFrame">
+
+            <TextView
+                android:background="@color/colorGold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:text=" Touch Submit Tag to Upload Score "/>
         </FrameLayout>
 
     </RelativeLayout>

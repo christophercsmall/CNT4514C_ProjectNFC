@@ -11,6 +11,7 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -55,6 +56,14 @@ public class StartActivity extends AppCompatActivity {
         findViewById(R.id.nfc_image2).setVisibility(View.GONE);
     }
 
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            //do something maybe
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     public void readFromIntent(Intent intent) {
 
         String action = intent.getAction();
@@ -93,7 +102,7 @@ public class StartActivity extends AppCompatActivity {
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
             if (text.equals("START") && (readyCode.equals(0) || readyCode.equals(1))){
-                crossfade();
+                highlight();
                 startActivity(new Intent(StartActivity.this, QuestionActivity.class));
                 finish();
             }
@@ -134,7 +143,7 @@ public class StartActivity extends AppCompatActivity {
         nfcAdapter.disableForegroundDispatch(this);
     }
 
-    private void crossfade() {
+    private void highlight() {
         findViewById(R.id.nfc_image1).setVisibility(View.GONE);
 
         findViewById(R.id.nfc_image2).setVisibility(View.VISIBLE);
