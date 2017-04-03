@@ -18,7 +18,8 @@
 
             <TableRow
                 android:gravity="center"
-                android:padding="40dp"
+                android:paddingTop="40dp"
+                android:paddingBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -78,8 +79,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
         <ImageView
             android:layout_height="600px"
             android:layout_width="match_parent"
@@ -101,15 +100,16 @@
 
     </FrameLayout>
 
-    <FrameLayout
+    <RelativeLayout
+        android:gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <TextView
-            android:layout_marginTop="3dp"
-            android:textSize="17dp"
+            android:textSize="20dp"
             android:id="@+id/startMsg"
             android:textColor="#ffffff"
+            android:background="@color/colorGold"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
             android:textAlignment="center"
@@ -117,6 +117,6 @@
             android:layout_width="match_parent"
             android:text="@string/touchStartText"/>
 
-    </FrameLayout>
+    </RelativeLayout>
 
 </LinearLayout>

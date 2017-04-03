@@ -64,7 +64,8 @@
 
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="50dp">
                 <EditText
                     android:id="@+id/first"
                     android:textColor="#ffffff"
@@ -103,8 +104,9 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -113,7 +115,7 @@
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:background="@drawable/bluewave"
                 android:id="@+id/imageView">
             </ImageView>
@@ -124,6 +126,7 @@
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:textAlignment="center"
+                android:textSize="18dp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:text="Touch Start Tag to begin."/>
