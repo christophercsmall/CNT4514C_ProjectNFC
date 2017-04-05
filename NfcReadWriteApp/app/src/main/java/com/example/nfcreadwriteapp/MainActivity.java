@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 
 public class MainActivity extends Activity {
 
@@ -43,7 +45,7 @@ public class MainActivity extends Activity {
 
     TextView tvNFCContent;
     TextView message;
-    Button btnWrite, btnClear, btnLockTag;
+    Button btnWrite, btnClear, btnLockTag, btnURITag;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class MainActivity extends Activity {
         btnWrite = (Button) findViewById(R.id.button);
         btnClear = (Button) findViewById(R.id.btnClear);
         btnLockTag = (Button) findViewById(R.id.btnLockTag);
+        btnURITag = (Button) findViewById(R.id.btnURITag);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
@@ -130,7 +133,29 @@ public class MainActivity extends Activity {
                 }
             }
         });
+
+        btnURITag.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if(myTag ==null) {
+                        Toast.makeText(context, ERROR_DETECTED, Toast.LENGTH_LONG).show();
+                    } else {
+                        writeURI("n00931863.sytes.net", myTag);
+                        Toast.makeText(context, WRITE_SUCCESS, Toast.LENGTH_LONG ).show();
+                    }
+                } catch (IOException e) {
+                    Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG ).show();
+                    e.printStackTrace();
+                } catch (FormatException e) {
+                    Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG ).show();
+                    e.printStackTrace();
+                }
+            }
+        });
     }
+
 
 
     /**********************************Read From NFC Tag***************************/
@@ -170,9 +195,21 @@ public class MainActivity extends Activity {
 
      /**********************************Write to NFC Tag****************************/
 
-     //add to poster
     private void write(String text, Tag tag) throws IOException, FormatException {
         NdefRecord[] records = { createRecord(text), NdefRecord.createApplicationRecord("cnt4514c.unfsymposiumnfcquiz") };
+        NdefMessage message = new NdefMessage(records);
+        // Get an instance of Ndef for the tag.
+        Ndef ndef = Ndef.get(tag);
+        // Enable I/O
+        ndef.connect();
+        // Write the message
+        ndef.writeNdefMessage(message);
+        // Close the connection
+        ndef.close();
+    }
+
+    private void writeURI(String text, Tag tag) throws IOException, FormatException {
+        NdefRecord[] records = { createURIRecord(text) };
         NdefMessage message = new NdefMessage(records);
         // Get an instance of Ndef for the tag.
         Ndef ndef = Ndef.get(tag);
@@ -206,6 +243,29 @@ public class MainActivity extends Activity {
             ndef.makeReadOnly();
         }
         ndef.close();
+    }
+
+    private NdefRecord createURIRecord(String text) throws UnsupportedEncodingException {
+//        String lang = "en";
+//        byte[] textBytes = text.getBytes();
+//        byte[] langBytes = lang.getBytes("US-ASCII");
+//        int langLength = langBytes.length;
+//        int textLength = textBytes.length;
+//        byte[] payload = new byte[1 + langLength + textLength];
+//
+//        // set status byte (see NDEF spec for actual bits)
+//        payload[0] = (byte) langLength;
+//
+//        // copy langbytes and textbytes into payload
+//        System.arraycopy(langBytes, 0, payload, 1, langLength);
+//        System.arraycopy(textBytes, 0, payload, 1 + langLength, textLength);
+//        //arraycopy(Object source, int sourcePosition, Object destination, int destinationPosition, int numberOfElements)
+
+        Uri uri = Uri.parse(text);
+
+        NdefRecord recordNFC = NdefRecord.createUri(uri);
+
+        return recordNFC;
     }
 
     private NdefRecord createRecord(String text) throws UnsupportedEncodingException {
