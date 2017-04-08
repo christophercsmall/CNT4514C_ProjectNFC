@@ -246,9 +246,9 @@ public class MainActivity extends Activity {
     }
 
     private NdefRecord createURIRecord(String text) throws UnsupportedEncodingException {
-//        String lang = "en";
+//        String lang = "";
 //        byte[] textBytes = text.getBytes();
-//        byte[] langBytes = lang.getBytes("US-ASCII");
+//        byte[] langBytes = lang.getBytes("UTF-8");
 //        int langLength = langBytes.length;
 //        int textLength = textBytes.length;
 //        byte[] payload = new byte[1 + langLength + textLength];
@@ -259,11 +259,10 @@ public class MainActivity extends Activity {
 //        // copy langbytes and textbytes into payload
 //        System.arraycopy(langBytes, 0, payload, 1, langLength);
 //        System.arraycopy(textBytes, 0, payload, 1 + langLength, textLength);
-//        //arraycopy(Object source, int sourcePosition, Object destination, int destinationPosition, int numberOfElements)
+//
+//        NdefRecord recordNFC = new NdefRecord(NdefRecord.TNF_WELL_KNOWN,  NdefRecord.RTD_URI,  new byte[0], payload);
 
-        Uri uri = Uri.parse(text);
-
-        NdefRecord recordNFC = NdefRecord.createUri(uri);
+        NdefRecord recordNFC = NdefRecord.createUri("http://" + text);
 
         return recordNFC;
     }
