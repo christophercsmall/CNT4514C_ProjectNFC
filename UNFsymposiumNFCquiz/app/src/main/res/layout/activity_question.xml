@@ -47,7 +47,7 @@
 
             <TableRow
                 android:gravity="center"
-                android:padding="40dp"
+                android:paddingTop="90dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -121,13 +121,13 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginTop="10dp"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:text="@string/optLetterA"/>
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_marginTop="0dp"
             android:gravity="center"
             android:textColor="#000000"
             android:text="@string/app_name"
@@ -142,13 +142,14 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:text="@string/optLetterB"/>
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:textColor="#000000"
             android:text="@string/app_name"
@@ -163,13 +164,14 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:text="@string/optLetterC"/>
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:textColor="#000000"
             android:text="@string/app_name"
@@ -184,13 +186,14 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:text="@string/optLetterD"/>
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:textColor="#000000"
             android:text="@string/app_name"

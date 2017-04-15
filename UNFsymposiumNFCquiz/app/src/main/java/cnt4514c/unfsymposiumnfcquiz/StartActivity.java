@@ -1,5 +1,6 @@
 package cnt4514c.unfsymposiumnfcquiz;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import java.io.UnsupportedEncodingException;
@@ -26,16 +28,33 @@ public class StartActivity extends AppCompatActivity {
     boolean writeMode;
     Integer readyCode;
 
-    EditText fName, lName, email;
+    EditText name, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        fName = (EditText) findViewById(R.id.first);
-        lName = (EditText) findViewById(R.id.last);
+        name = (EditText) findViewById(R.id.name);
         email = (EditText) findViewById(R.id.email);
+
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+            @Override
+            public void onFocusChange(View v, boolean hasFocus){
+                if (!hasFocus){
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        email.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+            @Override
+            public void onFocusChange(View v, boolean hasFocus){
+                if (!hasFocus){
+                    hideKeyboard(v);
+                }
+            }
+        });
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
@@ -56,12 +75,9 @@ public class StartActivity extends AppCompatActivity {
         findViewById(R.id.nfc_image2).setVisibility(View.GONE);
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
-            //do something maybe
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+    public void hideKeyboard(View view){
+        InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     public void readFromIntent(Intent intent) {

@@ -68,7 +68,7 @@ public class QuestionActivity extends AppCompatActivity {
         updateQuestionActivity();
 
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        vib.vibrate(100);
+        vib.vibrate(500);
 
         // Initially hide the content view.
         findViewById(R.id.nfc_image2).setVisibility(View.GONE);
@@ -80,16 +80,20 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
-        highlight(false);
+    public void onWindowFocusChanged(boolean hasFocus){
+        super.onWindowFocusChanged(hasFocus);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
-            highlight(false);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+    @Override
+    public void onBackPressed(){
+        highlight(false);
     }
 
     public void readFromIntent(Intent intent) {
@@ -115,7 +119,7 @@ public class QuestionActivity extends AppCompatActivity {
         boolean result = false;
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         //long[] patternTru = {0, 90, 75, 90, 75, 90, 75, 800};
-        long[] patternFal = {0, 90, 75, 90};
+        long[] patternFal = {0, 100, 100, 100};
 
         if (msgs == null || msgs.length == 0) return;
         String text = "";
@@ -164,7 +168,7 @@ public class QuestionActivity extends AppCompatActivity {
                 vib.vibrate(patternFal, -1);
                 firstCorrect = false;
                 //maybe add random incorrect message
-                Toast.makeText(this, "Wrong. Try Again.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Wrong. Try Again.", Toast.LENGTH_SHORT).show();
             }
         } catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());

@@ -40,7 +40,7 @@ public class SuccessActivity extends AppCompatActivity {
         successMsg = (TextView) findViewById(R.id.successMsg);
 
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        long[] patternTru = {0, 90, 75, 90, 75, 90, 75, 800};
+        long[] patternTru = {0, 90, 75, 90, 75, 90, 75, 500};
         vib.vibrate(patternTru, -1);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -73,6 +73,18 @@ public class SuccessActivity extends AppCompatActivity {
         highlight(false);
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus){
+        super.onWindowFocusChanged(hasFocus);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
     public void readFromIntent(Intent intent) {
 
         String action = intent.getAction();
@@ -95,8 +107,8 @@ public class SuccessActivity extends AppCompatActivity {
 
         boolean result = false;
         Vibrator vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        long[] patternTru = {0, 20};
-        long[] patternFal = {0, 90, 75, 90};
+        long[] patternTru = {0, 100};
+        long[] patternFal = {0, 100, 100, 100};
 
         if (msgs == null || msgs.length == 0) return;
         String text = "";
