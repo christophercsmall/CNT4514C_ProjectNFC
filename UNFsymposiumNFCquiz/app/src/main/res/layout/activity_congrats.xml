@@ -22,7 +22,7 @@
 
             <ImageView
                 android:id="@+id/ribbon"
-                android:layout_height="600px"
+                android:layout_height="500px"
                 android:layout_width="match_parent"
                 android:src="@drawable/successribbon"
                 android:layout_gravity="center"/>
@@ -54,7 +54,7 @@
                 android:textSize="100dp"
                 android:textColor="@color/colorGold"
                 android:gravity="center"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:layout_width="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
