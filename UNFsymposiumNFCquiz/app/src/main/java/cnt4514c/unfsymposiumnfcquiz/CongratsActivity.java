@@ -3,6 +3,7 @@ package cnt4514c.unfsymposiumnfcquiz;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -63,15 +64,6 @@ public class CongratsActivity extends AppCompatActivity {
 
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
-
-            //do something
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
     public void readFromIntent(Intent intent) {
 
         String action = intent.getAction();
@@ -105,8 +97,13 @@ public class CongratsActivity extends AppCompatActivity {
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
             if(text.equals("SUBMIT")){
+
+                Intent postScoreIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://n00931863.sytes.net/InsertScore.php?name=Chris_Small&email=c@s.com&score=100"));
+                startActivity(postScoreIntent);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://n00931863.sytes.net"));
+                startActivity(browserIntent);
                 //n00931863.sytes.net
-                //add fname, lname, email, score
+                //add name, email, score
                 //
                 finish();
             }
