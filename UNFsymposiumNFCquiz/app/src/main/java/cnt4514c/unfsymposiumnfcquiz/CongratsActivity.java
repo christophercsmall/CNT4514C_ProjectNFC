@@ -42,7 +42,7 @@ public class CongratsActivity extends AppCompatActivity {
         global = (Global) getApplicationContext();
         name = global.getName();
         email = global.getEmail();
-        ttime = getIntent().getStringExtra("time");
+        ttime = getIntent().getStringExtra("ttime");
 
         correctCount = getIntent().getIntExtra("correctCount", 0);
         qArrayLen = getIntent().getIntExtra("qArrayLen", 0);
@@ -103,7 +103,7 @@ public class CongratsActivity extends AppCompatActivity {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
-            if(text.equals("SUBMIT")){
+            if(text.equals("SUBMIT") && paramsValid(name, ttime, score)){
 
                 //get vars and add to uri
 
@@ -118,6 +118,19 @@ public class CongratsActivity extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());
         }
+    }
+
+    public boolean paramsValid(String nm, String tt, String sc){
+        boolean result = false;
+
+        if((!nm.isEmpty() && nm.length() > 0 && !nm.equals(""))
+        && (!tt.isEmpty() && tt.length() > 0 && !tt.equals(""))
+        && (!sc.isEmpty() && sc.length() > 0 && !sc.equals("")))
+        {
+            result = true;
+        }
+
+        return result;
     }
 
     @Override

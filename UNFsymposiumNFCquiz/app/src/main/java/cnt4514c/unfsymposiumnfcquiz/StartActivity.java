@@ -21,6 +21,8 @@ import java.io.UnsupportedEncodingException;
 
 public class StartActivity extends AppCompatActivity {
 
+    Global global;
+
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];
@@ -29,11 +31,14 @@ public class StartActivity extends AppCompatActivity {
     Integer readyCode;
 
     EditText name, email;
+    String nameText, emailText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        global = (Global)getApplicationContext();
 
         name = (EditText) findViewById(R.id.name);
         email = (EditText) findViewById(R.id.email);
@@ -117,7 +122,14 @@ public class StartActivity extends AppCompatActivity {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
-            if (text.equals("START") && (readyCode.equals(0) || readyCode.equals(1))){
+            String nameText = name.getText().toString().trim();
+            String emailText = email.getText().toString().trim();
+
+            if (text.equals("START") && (!nameText.isEmpty() && !nameText.equals("") && nameText.length() > 0) && (readyCode.equals(0) || readyCode.equals(1))){
+
+                global.setName(nameText);
+                global.setEmail(emailText);
+
                 highlight();
                 startActivity(new Intent(StartActivity.this, QuestionActivity.class));
                 finish();
