@@ -142,14 +142,14 @@ public class QuestionActivity extends AppCompatActivity {
                     quiz.correctCount++;
                 }
 
-                String time = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(timeElapsed),
+                String ttime = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(timeElapsed),
                                                          TimeUnit.MILLISECONDS.toSeconds(timeElapsed) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeElapsed)));
 
                 Intent successIntent = new Intent(QuestionActivity.this, SuccessActivity.class);
                 successIntent.putExtra("qNum", quiz.currentQuestionNum);
                 successIntent.putExtra("qArrayLen", quiz.qArray.size());
                 successIntent.putExtra("correctCount", quiz.correctCount);
-                successIntent.putExtra("time", time);
+                successIntent.putExtra("ttime", ttime);
                 //add any other data to pass to new activity
                 startActivity(successIntent);
 

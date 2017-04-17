@@ -26,7 +26,8 @@ public class CongratsActivity extends AppCompatActivity {
     Tag myTag;
     boolean writeMode;
     Integer correctCount, qArrayLen;
-    String time;
+    String name, email, ttime, score;
+    Global global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +36,21 @@ public class CongratsActivity extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        correctCount = getIntent().getIntExtra("correctCount", 0);
-        qArrayLen = getIntent().getIntExtra("qArrayLen", 0);
-        time = getIntent().getStringExtra("time");
-
         TextView quizScoreText = (TextView) findViewById(R.id.correctMsg);
         TextView timeText = (TextView) findViewById(R.id.timeMsg);
 
-        quizScoreText.setText(correctCount + " / " + qArrayLen);
-        timeText.setText(time);
+        global = (Global) getApplicationContext();
+        name = global.getName();
+        email = global.getEmail();
+        ttime = getIntent().getStringExtra("time");
+
+        correctCount = getIntent().getIntExtra("correctCount", 0);
+        qArrayLen = getIntent().getIntExtra("qArrayLen", 0);
+
+        score = (correctCount + " / " + qArrayLen);
+
+        quizScoreText.setText(score);
+        timeText.setText(ttime);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
@@ -98,13 +105,11 @@ public class CongratsActivity extends AppCompatActivity {
 
             if(text.equals("SUBMIT")){
 
-                Intent postScoreIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://n00931863.sytes.net/InsertScore.php?name=Chris_Small&email=c@s.com&score=100"));
+                //get vars and add to uri
+
+                Intent postScoreIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://n00931863.sytes.net?name=" +name+ "&email=" +email+ "&ttime=" +ttime+ "&score=" +score));
                 startActivity(postScoreIntent);
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://n00931863.sytes.net"));
-                startActivity(browserIntent);
-                //n00931863.sytes.net
-                //add name, email, score
-                //
+
                 finish();
             }
             else{

@@ -65,7 +65,7 @@ public class SuccessActivity extends AppCompatActivity {
         qNum = getIntent().getIntExtra("qNum", 0);
         qArrayLen = getIntent().getIntExtra("qArrayLen", 0);
         correctCount = getIntent().getIntExtra("correctCount", 0);
-        timeElapsed = getIntent().getStringExtra("time");
+        timeElapsed = getIntent().getStringExtra("ttime");
     }
 
     @Override
@@ -129,7 +129,7 @@ public class SuccessActivity extends AppCompatActivity {
                     Intent congratsIntent = new Intent(SuccessActivity.this, CongratsActivity.class);
                     congratsIntent.putExtra("qArrayLen", qArrayLen);
                     congratsIntent.putExtra("correctCount", correctCount);
-                    congratsIntent.putExtra("time", timeElapsed);
+                    congratsIntent.putExtra("ttime", timeElapsed);
                     QuestionActivity.chron.stop();
                     //add any other data to pass to new activity
                     startActivity(congratsIntent);
