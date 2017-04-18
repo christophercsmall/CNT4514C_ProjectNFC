@@ -113,6 +113,7 @@ public class CongratsActivity extends AppCompatActivity {
                 finish();
             }
             else{
+                Toast.makeText(this, "Error Submitting Score", Toast.LENGTH_LONG).show();
             }
 
         } catch (UnsupportedEncodingException e) {
