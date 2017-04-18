@@ -4,15 +4,14 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.PorterDuff;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -123,16 +122,24 @@ public class StartActivity extends AppCompatActivity {
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
             String nameText = name.getText().toString().trim();
+            nameText = nameText.replaceAll(" ", "_").toLowerCase();
             String emailText = email.getText().toString().trim();
+            emailText = emailText.replaceAll(" ", "_").toLowerCase();
 
             if (text.equals("START") && (!nameText.isEmpty() && !nameText.equals("") && nameText.length() > 0) && (readyCode.equals(0) || readyCode.equals(1))){
 
+                if ((emailText.isEmpty() || emailText.equals("") || emailText.length() == 0)){
+                    emailText = "-";
+                }
                 global.setName(nameText);
                 global.setEmail(emailText);
 
                 highlight();
                 startActivity(new Intent(StartActivity.this, QuestionActivity.class));
                 finish();
+            }
+            else {
+                Toast.makeText(this, "Name is required.", Toast.LENGTH_LONG).show();
             }
         } catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());

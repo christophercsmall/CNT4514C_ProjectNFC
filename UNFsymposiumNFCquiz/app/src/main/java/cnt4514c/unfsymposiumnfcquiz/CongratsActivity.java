@@ -47,7 +47,7 @@ public class CongratsActivity extends AppCompatActivity {
         correctCount = getIntent().getIntExtra("correctCount", 0);
         qArrayLen = getIntent().getIntExtra("qArrayLen", 0);
 
-        score = (correctCount + " / " + qArrayLen);
+        score = correctCount.toString();
 
         quizScoreText.setText(score);
         timeText.setText(ttime);
@@ -107,7 +107,7 @@ public class CongratsActivity extends AppCompatActivity {
 
                 //get vars and add to uri
 
-                Intent postScoreIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://n00931863.sytes.net?name=" +name+ "&email=" +email+ "&ttime=" +ttime+ "&score=" +score));
+                Intent postScoreIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://n00931863.sytes.net/main.php?name=" +name+ "&email=" +email+ "&ttime=" +ttime+ "&score=" +score));
                 startActivity(postScoreIntent);
 
                 finish();
