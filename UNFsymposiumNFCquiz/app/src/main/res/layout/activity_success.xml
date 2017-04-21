@@ -103,17 +103,63 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:textSize="20dp"
-            android:id="@+id/startMsg"
-            android:textColor="#ffffff"
-            android:background="@color/colorGold"
-            android:textStyle="bold"
+        <TableLayout
             android:layout_gravity="center_vertical"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="@string/touchStartText"/>
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:gravity="center"
+                android:background="@color/colorGold"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:textSize="20dp"
+                    android:id="@+id/startMsg"
+                    android:textColor="#ffffff"
+                    android:background="@color/colorGold"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="Touch "/>
+
+                <ImageView
+                    android:src="@drawable/open"
+                    android:layout_height="30dp"
+                    android:layout_width="30dp"/>
+
+                <TextView
+                    android:id="@+id/startMsg2"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:textSize="18dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text=" to Continue."/>
+
+            </TableRow>
+
+        </TableLayout>
+
+        <!--<TextView-->
+            <!--android:textSize="20dp"-->
+            <!--android:id="@+id/startMsg"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:background="@color/colorGold"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:textAlignment="center"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:text="@string/touchStartText"/>-->
 
     </RelativeLayout>
 

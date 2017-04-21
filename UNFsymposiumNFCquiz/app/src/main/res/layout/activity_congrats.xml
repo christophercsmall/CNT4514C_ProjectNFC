@@ -67,16 +67,61 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/timeFrame">
 
-            <TextView
-                android:background="@color/colorGold"
+            <TableLayout
+                android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text=" Touch SUBMIT tag to upload score "/>
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:gravity="center"
+                    android:background="@color/colorGold"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+
+                    <TextView
+                        android:textSize="20dp"
+                        android:id="@+id/startMsg"
+                        android:textColor="#ffffff"
+                        android:background="@color/colorGold"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:text="Touch "/>
+
+                    <ImageView
+                        android:src="@drawable/closed"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"/>
+
+                    <TextView
+                        android:id="@+id/startMsg2"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:text=" to Submit Your Score."/>
+
+                </TableRow>
+
+            </TableLayout>
+            <!--<TextView-->
+                <!--android:background="@color/colorGold"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:textAlignment="center"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:textSize="20dp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text=" Touch SUBMIT tag to upload score "/>-->
         </RelativeLayout>
 
     </RelativeLayout>

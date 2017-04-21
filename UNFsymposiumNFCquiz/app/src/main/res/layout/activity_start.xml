@@ -124,16 +124,43 @@
                 android:id="@+id/imageView">
             </ImageView>
 
-            <TextView
-                android:id="@+id/startMsg"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
+            <TableLayout
                 android:layout_gravity="center_vertical"
-                android:textAlignment="center"
-                android:textSize="18dp"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="Touch Start Tag to begin."/>
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/startMsg1"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:text="Touch "/>
+
+                    <ImageView
+                        android:src="@drawable/open"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"/>
+
+                    <TextView
+                        android:id="@+id/startMsg2"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:text=" to begin."/>
+
+                </TableRow>
+
+            </TableLayout>
 
         </FrameLayout>
 
